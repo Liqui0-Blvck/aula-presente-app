@@ -1,0 +1,58 @@
+.list-asis {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto 0;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+
+}
+
+.title-asistencia {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+.box-item{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  span {
+    position:relative;
+    right: 8px;
+    font-weight: bold;
+  }
+}
+
+ion-item {
+  --background: rgba(45, 112, 229, 1);
+  border-radius: 10px;
+  --color: white;
+
+}
+
+ion-menu-button {
+  --background:  rgba(45, 112, 229, 1);
+  --color: white;
+}
+
+ion-toolbar {
+  --background: white;
+  --border-color: white;
+}
+
+ion-buttons {
+  --background: black;
+}
+.item-accordion {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+
+  ion-item{
+    --background: white;
+    --color: rgba(45, 112, 229, 1)
+  }
+}

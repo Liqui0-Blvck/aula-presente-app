@@ -1,13 +1,42 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>asistencia</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Asistencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">asistencia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <h1 class="title-asistencia">{{ carrera }}</h1>
+
+  <div class="list-asis">
+    <ion-list *ngFor="let horarioItem of horarios.horario">
+      <ion-accordion-group [multiple]="true">
+        <ion-accordion>
+          <ion-item slot="header" >
+            <div class="box-item">
+              <ion-text>{{ horarioItem.curso }}</ion-text>
+              <span> %{{ getPorcentajeAsistencia(horarioItem.clases_impartida, horarioItem.asistencia)}}</span>
+            </div>
+          </ion-item>
+          <div class="item-accordion" slot="content">
+            <ion-item>
+              N° de clases registradas: {{ horarioItem.clases_impartida}}
+            </ion-item>
+            <ion-item>
+              Asistencia: {{ horarioItem.asistencia }}
+            </ion-item>
+            
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-list>
+  </div>
+
+  
+
+  
+ 
+  
 </ion-content>
