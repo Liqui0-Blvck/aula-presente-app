@@ -1,13 +1,94 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="header">
+    <div class="ion-logo">
+      <ion-img src="/assets//img/aula-presente-rounded.png"/>
+    </div>
+    <ion-title>Registrate</ion-title>
+    <p>Crea una nueva cuenta Aula</p>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <form [formGroup]="regForm" novalidate>
+    <div class="ion-padding">
+      <ion-item>
+        <ion-input label="Nombre" 
+          placeholder="Fabian Muñoz" 
+          type="text" 
+          labelPlacement="floating"
+          class="input"
+          color="secondary"
+          formControlName="fullname"
+
+          ></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-input label="Email" 
+          placeholder="fi.munoz@duocuc.cl" 
+          type="text" 
+          labelPlacement="floating"
+          class="input"
+          color="secondary"
+          formControlName="email"
+
+          ></ion-input>
+        <ion-icon></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Password" 
+          placeholder="amaroweko" 
+          type="password" 
+          labelPlacement="floating"
+          class="input"
+          color="secondary"
+          formControlName="password"
+
+          ></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-item>
+
+      <!-- <div>
+        <ion-checkbox>
+          <a class="ion-link">¿Acepta los terminos y condiciones?</a>
+        </ion-checkbox>
+      </div>
+
+      <div >
+        <ion-text>
+          Tienes que aceptar las vainas
+        </ion-text>
+      </div> -->
+
+      <ion-button (click)="signUp()" class="btn-signIn">
+        Ingresar
+      </ion-button>
+
+      <div class="separator">
+        <hr>
+        <p> O </p>
+        <hr>
+       </div>
+
+      <div class="btn-boxSign">
+        <ion-button>
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-button>
+  
+        <ion-button>
+          <ion-icon name="logo-apple"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>¿Tienes cuenta?
+        <a class="ion-link"
+           [routerLink]="['/login']"
+        >Inicia Sesion</a> 
+      </p>
+    </div>
+  </form>
 </ion-content>

@@ -1,13 +1,85 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content slot="start" swipeGesture="false">
+  <div class="header">
+    <div class="ion-logo">
+      <ion-img src="/assets//img/aula-presente-rounded.png"/>
+    </div>
+    <ion-title>Bienvenido</ion-title>
+    <p>Ingresa a tu cuenta</p>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-alert
+  [isOpen]="isAlertOpen"
+  header="Aviso"
+  subHeader="Important message"
+  message="Debes llenar la información"
+  [buttons]="alertButton"
+  (didDismiss)="setOpen(false)"
+  ></ion-alert>
+
+  <form [formGroup]="logForm" >
+    <div class="ion-padding">
+      <ion-item>
+        <ion-input label="Email" 
+          placeholder="fi.munoz@duocuc.cl" 
+          type="text" 
+          labelPlacement="floating"
+          class="input"
+          color="secondary"
+          formControlName="email"
+          ></ion-input>
+        <ion-icon></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Password" 
+          placeholder="amaroweko" 
+          [type]="hidePassword ? 'password' : 'text'"
+          labelPlacement="floating"
+          class="input"
+          color="secondary"
+          formControlName="password"
+          ></ion-input>
+        <ion-icon *ngIf="hidePassword" name="lock-closed" (click)="togglePasswordVisibility()"></ion-icon>
+        <ion-icon *ngIf="!hidePassword" name="lock-closed-outline" (click)="togglePasswordVisibility()"></ion-icon>
+      </ion-item>
+
+      <div class="box-links">
+        <ion-checkbox>
+          <a class="ion-link">Recuerdame</a>
+        </ion-checkbox>
+
+        <a class="ion-link">¿Olvidaste la contraseña?</a>
+      </div>
+
+      <ion-button (click)="login()" class="btn-signIn">
+        Ingresar
+      </ion-button>
+
+      <div class="separator">
+        <hr />
+        <p> O </p>
+        <hr>
+       </div>
+
+      <div class="btn-boxSign">
+        <ion-button>
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-button>
+  
+        <ion-button>
+          <ion-icon name="logo-apple"></ion-icon>
+        </ion-button>
+      </div>
+
+
+      <div class="footer">
+        <p>¿Eres nuevo en la plataforma?
+          <a class="ion-link"
+             [routerLink]="['/register']"
+          >Registrate</a> 
+        </p>
+      </div>
+
+    </div>
+  </form>
 </ion-content>
