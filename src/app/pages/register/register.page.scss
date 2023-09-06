@@ -53,20 +53,20 @@ ion-item {
 // }
 
 .btn-signIn {
-  --background: #F05454;
+  --background: rgba(45, 112, 229, 1);
   margin-top: 20px;
   display:block;
-  color: #222831;
+  color: white;
   font-size: 19px;
 }
 
 .btn-boxSign {
   display: flex;
   ion-button {
-    --background: #F05454;
+    --background: rgba(45, 112, 229, 1);
     display: block;
     width: 50%;
-    color: #222831;
+    color: white;
     font-size: 20px;
   }
 }
@@ -78,6 +78,7 @@ ion-item {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+
   hr {
     position: relative;
 
@@ -95,4 +96,8 @@ ion-item {
 .footer {
   margin-top: 60px;
   text-align: center;
+
+  a {
+    color: rgba(45, 112, 229, 1);
+  }
 }

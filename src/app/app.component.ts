@@ -20,8 +20,7 @@ export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'mail' },
     { title: 'Asistencias', url: '/asistencia', icon: 'paper-plane' },
-    { title: 'Asignaturas', url: '/asignaturas', icon: 'heart' },
-    { title: 'Perfil', url: '/perfil', icon: 'person-circle-outline'}
+    { title: 'Horarios', url: '/asignaturas', icon: 'heart' },
   ];
 
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

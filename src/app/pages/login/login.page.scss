@@ -21,7 +21,6 @@ ion-item {
     height: 170px;
     border-radius: 50%;
     margin: 0 auto 10px;
-    // border: 1px solid black;
     
 
     ion-img {
@@ -65,19 +64,19 @@ ion-item {
 }
 
 .btn-signIn {
-  --background: #F05454;
+  --background: rgba(45, 112, 229, 1);
   display:block;
-  color: #222831;
+  color: white;
     font-size: 20px;
 }
 
 .btn-boxSign {
   display: flex;
   ion-button {
-    --background: #F05454;
+    --background: rgba(45, 112, 229, 1);
     display: block;
     width: 50%;
-    color: #222831;
+    color: white;
     font-size: 20px;
   }
 }

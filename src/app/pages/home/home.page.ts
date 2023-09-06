@@ -117,7 +117,7 @@ export class HomePage implements OnInit, OnDestroy {
       
       this.horarios.horario.forEach((hora) => {
         hora.fecha_clase.forEach((casa) => {
-          if (casa.dia && this.verificarDiaYHoraClase(casa.dia, 'jueves')) {
+          if (casa.dia && this.verificarDiaYHoraClase(casa.dia, diaActual)) {
             this.componentes.push(hora)
             this.mostrarComponente = true;
           }

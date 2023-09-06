@@ -4,6 +4,10 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
+
+    <ion-avatar slot="end" [routerLink]="['/perfil']">
+      <img src="/assets/img/219969.png" alt="picture user">
+    </ion-avatar>
   </ion-toolbar>
 
   <ion-item lines="none">
@@ -23,24 +27,27 @@
     
 
     <div class="main">
-      <!-- <swiper-container *ngFor="let clase of componentes">
-        <swiper-slide>Algo</swiper-slide>
-      </swiper-container> -->
+      <swiper-container [options]="{ slidesPerView: 3, loop: true }">
+        <swiper-slide *ngFor="let clase of componentes">
+          <ion-card>
+            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+            <ion-card-header>
+              <ion-card-title>{{ clase.curso }}</ion-card-title>
+              <ion-card-subtitle>{{ clase.codigo }}</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <p>
+                {{ clase.profesor }}
+              </p>
 
-
-      <ion-item *ngFor="let clase of componentes" lines="none">
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>{{ clase.curso }}</ion-card-title>
-            <ion-card-subtitle>{{ clase.codigo }}</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            {{ clase.profesor }}
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
+              <span>
+                <ion-icon name="qr-code-outline" title="Barcode-Scanner"></ion-icon>
+              </span>
+            </ion-card-content>
+          </ion-card>
+        </swiper-slide>
+      </swiper-container>
     </div>
 
     <!-- <h2>{{ }}</h2> -->
