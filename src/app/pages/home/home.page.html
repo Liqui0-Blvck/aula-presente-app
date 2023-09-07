@@ -42,31 +42,14 @@
               </p>
 
               <span>
-                <ion-icon name="qr-code-outline" title="Barcode-Scanner"></ion-icon>
+                <ion-icon name="qr-code-outline" title="Barcode-Scanner" (click)="takePicture()"></ion-icon>
               </span>
             </ion-card-content>
           </ion-card>
         </swiper-slide>
       </swiper-container>
     </div>
-
-    <!-- <h2>{{ }}</h2> -->
   </div>
 
   
 </ion-content>
-
-<!-- 
-<ion-item *ngFor="let clase of componentes" lines="none">
-  <ion-card>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-    <ion-card-header>
-      <ion-card-title>{{ clase.curso }}</ion-card-title>
-      <ion-card-subtitle>{{ clase.codigo }}</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      {{ clase.profesor }}
-    </ion-card-content>
-  </ion-card>
-</ion-item> -->

@@ -3,6 +3,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Carrera, Horarios, User } from 'src/app/models';
 import { Subscription } from 'rxjs';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 
 
@@ -78,6 +79,8 @@ export class HomePage implements OnInit, OnDestroy {
     if (this.subscriberUserInfo) {
       this.subscriberUserInfo.unsubscribe();
     }
+
+    Camera.requestPermissions()
   }
 
   getUserInfo(uid: string) {
@@ -127,10 +130,34 @@ export class HomePage implements OnInit, OnDestroy {
   });
 }
 
-verificarDiaYHoraClase(diaClase: string, diaActual: string): boolean {
-  return diaClase.toLowerCase() === diaActual.toLowerCase();
-}
+  verificarDiaYHoraClase(diaClase: string, diaActual: string): boolean {
+    return diaClase.toLowerCase() === diaActual.toLowerCase();
+  }
+
+
+  async takePicture () {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera
+    });
+  
+    // image.webPath will contain a path that can be set as an image src.
+    // You can access the original file using image.path, which can be
+    // passed to the Filesystem API to read the raw data of the image,
+    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+    var imageUrl = image.webPath;
+  
+    // Can be set to the src of an image now
+    // imageElement.src = imageUrl;
+  };
+  
 
 
 
 }
+
+
+
+
