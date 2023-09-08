@@ -113,6 +113,7 @@ export class HomePage implements OnInit, OnDestroy {
   const path = 'horarios';
   this.firebase.getDoc<Horarios>(path, horario_id).subscribe(res => {
     if(res){
+      console.log(res)
       this.horarios = res;
       const diaActual = new Date().toLocaleDateString('es-US', { weekday: 'long' }).toLowerCase();
       this.mostrarComponente = false; 

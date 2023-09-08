@@ -8,7 +8,6 @@ ion-item {
   padding: 0 10px;
 }
 
-
 ion-content {
   --background: linear-gradient(
     90deg,
@@ -81,6 +80,11 @@ ion-content {
         border-radius: 10px;
         padding: 10px;
         cursor: pointer;
+
+        &:hover {
+          background-color:rgba(115, 134, 189, 0.204);
+          transform: scale(1.04);
+        }
 
 
         h2 {

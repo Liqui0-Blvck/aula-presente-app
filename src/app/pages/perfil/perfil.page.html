@@ -4,7 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-title>Hola</ion-title>
 </ion-header>
 
 
@@ -20,7 +19,7 @@
       </ion-avatar>
 
       <ion-list>
-        <div>
+        <div [routerLink]="['/detalles-cuenta']">
           <h2>Editar Perfil</h2>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </div>

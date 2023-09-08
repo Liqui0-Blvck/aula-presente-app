@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true">
+
+  <section class="main">
+
+    <h1> Editar Informacion Personal</h1>
+
+    <div class="floating-card">
+      <ion-avatar>
+        <img src="/assets/img/219969.png" alt="picture user">
+      </ion-avatar>
+
+      <form>
+        <div class="box-form ion-padding">
+          <ion-item lines="none">
+            <ion-input
+              label="Nombre"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              label="Apellidos"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Cuidad"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Direccion"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Celular"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary">
+            </ion-input>
+          </ion-item>
+        </div>
+      </form>
+
+      <div class="buttons">
+        <ion-button [routerLink]="['/perfil']">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+        <ion-button> Guardar cambios</ion-button>
+      </div>
+    </div>
+  </section>
+</ion-content>
