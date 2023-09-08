@@ -9,7 +9,7 @@
         <img src="/assets/img/219969.png" alt="picture user">
       </ion-avatar>
 
-      <form>
+      <form [formGroup]="userForm">
         <div class="box-form ion-padding">
           <ion-item lines="none">
             <ion-input
@@ -17,7 +17,9 @@
               type="text"
               labelPlacement="floating"
               class="input"
-              color="secondary">
+              color="secondary"
+              [value]="user.datos_personales.nombre"
+              disabled="true">
             </ion-input>
           </ion-item>
 
@@ -27,27 +29,34 @@
               type="text"
               labelPlacement="floating"
               class="input"
-              color="secondary">
+              color="secondary"
+              [value]="user.datos_personales.apellido"
+              disabled="true"
+              >
             </ion-input>
           </ion-item>
           
           <ion-item lines="none">
             <ion-input
-              label="Cuidad"
+              label="Ciudad"
               type="text"
               labelPlacement="floating"
               class="input"
-              color="secondary">
+              color="secondary"
+              formControlName="cuidad"
+              [value]="user.datos_personales.cuidad">
             </ion-input>
           </ion-item>
           
           <ion-item lines="none">
             <ion-input
-              label="Direccion"
+              label="Dirección"
               type="text"
               labelPlacement="floating"
               class="input"
-              color="secondary">
+              color="secondary"
+              formControlName="direccion"
+              [value]="user.datos_personales.direccion">
             </ion-input>
           </ion-item>
           
@@ -57,17 +66,19 @@
               type="text"
               labelPlacement="floating"
               class="input"
-              color="secondary">
+              color="secondary"
+              formControlName="celular"
+              [value]="user.datos_personales.numero_celular">
             </ion-input>
           </ion-item>
         </div>
       </form>
 
       <div class="buttons">
-        <ion-button [routerLink]="['/perfil']">
+        <ion-button [routerLink]="['/perfil']" routerDirection="back">
           <ion-icon name="arrow-back-outline"></ion-icon>
         </ion-button>
-        <ion-button> Guardar cambios</ion-button>
+        <ion-button (click)="updateUser()"> Guardar cambios</ion-button>
       </div>
     </div>
   </section>

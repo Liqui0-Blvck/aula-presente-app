@@ -24,7 +24,14 @@ export class HomePage implements OnInit, OnDestroy {
     fullname: '',
     institucion: '',
     carrera: '',
-    horario: ''
+    horario: '',
+    datos_personales: {
+      apellido: '',
+      nombre: '',
+      direccion: '',
+      cuidad: '',
+      numero_celular: ''
+    }
   };
 
   carrera: Carrera = {
@@ -68,7 +75,14 @@ export class HomePage implements OnInit, OnDestroy {
       fullname: '',
       institucion: '',
       carrera: '',
-      horario: ''
+      horario: '',
+      datos_personales: {
+        apellido: '',
+        nombre: '',
+        direccion: '',
+        cuidad: '',
+        numero_celular: ''
+    }
     };
   }
 
@@ -87,6 +101,7 @@ export class HomePage implements OnInit, OnDestroy {
     const path = 'users';
     this.subscriberUserInfo = this.firebase.getDoc<User>(path, uid).subscribe((res) => {
       if (res) {
+        console.log(res)
         this.user = res;
         this.getInfoCarrera(this.user.carrera) 
         if (!this.mostrarComponente) {

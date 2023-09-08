@@ -32,11 +32,18 @@ export class AppComponent implements OnInit {
 
   user: User = {
     uid: '',
-      email: '',
-      fullname: '',
-      institucion: '',
-      carrera: '',
-      horario: ''
+    email: '',
+    fullname: '',
+    institucion: '',
+    carrera: '',
+    horario: '',
+    datos_personales: {
+      apellido: '',
+      nombre: '',
+      direccion: '',
+      cuidad: '',
+      numero_celular: ''
+  }
   };
 
   subscriberUserInfo!: Subscription;
@@ -79,7 +86,14 @@ export class AppComponent implements OnInit {
       fullname: '',
       institucion: '',
       carrera: '',
-      horario: ''
+      horario: '',
+      datos_personales: {
+        apellido: '',
+        nombre: '',
+        direccion: '',
+        cuidad: '',
+        numero_celular: ''
+    }
     };
   }
 

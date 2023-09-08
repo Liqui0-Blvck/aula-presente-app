@@ -37,8 +37,15 @@ export class AsistenciaPage implements OnInit {
     fullname: '',
     institucion: '',
     carrera: '',
-    horario: ''
-  }
+    horario: '',
+    datos_personales: {
+      apellido: '',
+      nombre: '',
+      direccion: '',
+      cuidad: '',
+      numero_celular: ''
+    }
+  };
 
   subscriberUserInfo!: Subscription;
   
@@ -72,9 +79,16 @@ export class AsistenciaPage implements OnInit {
       fullname: '',
       institucion: '',
       carrera: '',
-      horario: ''
-    };
+      horario: '',
+      datos_personales: {
+        apellido: '',
+        nombre: '',
+        direccion: '',
+        cuidad: '',
+        numero_celular: ''
+      }
   }
+}
 
   
   getUserInfo(uid: string){

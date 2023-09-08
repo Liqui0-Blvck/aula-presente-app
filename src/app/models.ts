@@ -1,10 +1,17 @@
 export interface User {
-  uid: string,
+  uid: string
   email: string
-  fullname: string,
-  institucion: string,
+  fullname: string
+  institucion: string
   carrera: string
   horario: string
+  datos_personales: {
+    apellido: string
+    nombre: string
+    direccion: string
+    cuidad: string
+    numero_celular: string
+  }
 }
 
 export interface Carrera {
