@@ -4,6 +4,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Carrera, Horario ,Horarios, User } from 'src/app/models';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 @Component({
@@ -54,7 +56,8 @@ export class AsistenciaPage implements OnInit {
   constructor(
     public auth: AuthenticationService,
     public firebase: FirestoreService,
-    public router: Router
+    public router: Router,
+    private data: SharedService
   ) {
     this.auth.stateAuth().subscribe(res => {
       if(res !== null){
@@ -69,6 +72,22 @@ export class AsistenciaPage implements OnInit {
 
   async ngOnInit() {
     const uid = await this.auth.getProfile()
+
+    this.data.getUser().subscribe((user) => {
+      if (user) {
+        this.user = user
+      }
+    })
+
+    this.data.getHorarios().subscribe((horario) => {
+      if (horario){
+        this.horarios = horario
+      }
+    })
+
+    this.getInstitucion(this.user.carrera)
+
+
   }
 
   handleSessionEnd() {
@@ -96,18 +115,6 @@ export class AsistenciaPage implements OnInit {
     this.subscriberUserInfo = this.firebase.getDoc<User>(path, uid).subscribe(res => {
       if(res){
         this.user = res
-        this.getHorario(this.user.horario)
-        this.getInstitucion(this.user.carrera)
-      }
-    })
-  }
-
-
-  getHorario(horario_id: string){
-    const path = 'horarios'
-    this.firebase.getDoc<Horarios>(path, horario_id).subscribe(res => {
-      if(res){
-        this.horarios = res
       }
     })
   }
