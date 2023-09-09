@@ -47,7 +47,8 @@
           formControlName="password"
 
           ></ion-input>
-        <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-icon *ngIf="hidePassword" name="lock-closed" (click)="togglePasswordVisibility()"></ion-icon>
+          <ion-icon *ngIf="!hidePassword" name="lock-closed-outline" (click)="togglePasswordVisibility()"></ion-icon>
       </ion-item>
 
       <!-- <div>

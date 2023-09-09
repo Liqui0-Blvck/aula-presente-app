@@ -14,6 +14,8 @@ export class RegisterPage implements OnInit {
 
   regForm!: FormGroup;
 
+  hidePassword: boolean = true;
+
   constructor(
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
@@ -76,5 +78,9 @@ export class RegisterPage implements OnInit {
         loading.dismiss();
       }
     }
+  }
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }
