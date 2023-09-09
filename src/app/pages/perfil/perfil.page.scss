@@ -9,6 +9,8 @@ ion-item {
 }
 
 ion-content {
+  height: 100vh;
+  
   --background: linear-gradient(
     90deg,
     rgba(43, 90, 148, 1) 0%,
@@ -31,10 +33,10 @@ ion-content {
 
 
     .floating-card {
-      z-index: 99;
-      position: fixed;
+      position: relative;
       margin: 0 auto;
-      top: 160px;
+      margin-bottom: 20px;
+      top: 50px;
       bottom: 0;
       left: 0;
       right: 0;
@@ -62,7 +64,7 @@ ion-content {
 
 
       ion-list {
-        height: 60%;
+        height: 50%;
         display: flex;
         justify-content: center;
         flex-direction: column;
