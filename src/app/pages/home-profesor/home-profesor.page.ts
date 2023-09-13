@@ -1,20 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Subscription } from 'rxjs';
+import { Profesor, User } from 'src/app/models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { Carrera, Horarios, User } from 'src/app/models';
-import { Subscription } from 'rxjs';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
 
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-home-profesor',
+  templateUrl: './home-profesor.page.html',
+  styleUrls: ['./home-profesor.page.scss'],
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomeProfesorPage implements OnInit {
   public uid = '';
   public instituto = '';
   public fechaActual = new Date();
@@ -22,7 +20,12 @@ export class HomePage implements OnInit, OnDestroy {
   public dia = this.fechaActual.getDate();
   public nombreMes = this.obtenerNombreMes(this.fechaActual.getMonth());
 
-  public showCard!: false;
+  componentes: any[] = [];
+
+  cursos: Profesor = {
+    uid: ' ',
+    cursos: []
+  }
 
   user: User = {
     uid: '',
@@ -40,23 +43,12 @@ export class HomePage implements OnInit, OnDestroy {
       numero_celular: ''
     }
   };
-
-  carrera: Carrera = {
-    asignaturas: [],
-    nombre: ''
-  };
-
-
-  mostrarComponente!: boolean;
-
-  
-
   subscriberUserInfo!: Subscription;
+  mostrarComponente!: boolean;
 
   constructor(
     private auth: AuthenticationService,
     private firebase: FirestoreService,
-    private router: Router,
     private data: SharedService
   ) {
     this.auth.stateAuth().subscribe((res) => {
@@ -67,15 +59,11 @@ export class HomePage implements OnInit, OnDestroy {
         this.clearUserData();
       }
     });
+   }
+
+  ngOnInit() {
   }
 
-  horarios: Horarios = {
-    horario: [],
-    uid: ''
-  }
-
-  componentes: any[] = [];
-  
   clearUserData() {
     this.uid = '';
     this.user = {
@@ -96,19 +84,6 @@ export class HomePage implements OnInit, OnDestroy {
     };
   }
 
-  async ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    if (this.subscriberUserInfo) {
-      this.subscriberUserInfo.unsubscribe();
-    }
-
-    Camera.requestPermissions() 
-  
-  
-  }
-
   getUserInfo(uid: string) {
     const path = 'users';
     this.subscriberUserInfo = this.firebase.getDoc<User>(path, uid).subscribe((res) => {
@@ -118,7 +93,7 @@ export class HomePage implements OnInit, OnDestroy {
         this.data.setUser(this.user)
 
         if (!this.mostrarComponente) {
-          this.getHorario(this.user.horario);
+          this.getCursos(this.user.horario);
         }
       } else {
         console.log('desconectado');
@@ -126,15 +101,14 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
 
-
-  getHorario(horario_id: string){
-  const path = 'horarios';
-  this.firebase.getDoc<Horarios>(path, horario_id).subscribe(res => {
-    if(res){
-      this.horarios = res;
-      console.log(this.horarios)
-
-      this.data.setHorarios(this.horarios)
+  getCursos(curso_id: string){
+    const path = 'horarios'
+    this.firebase.getDoc<Profesor>(path, curso_id).subscribe(res => {
+      if(res){
+        this.cursos = res
+        this.data.setCursos(res)
+        console.log(res)
+      }
 
       const diaActual = new Date().toLocaleDateString('es-US', { weekday: 'long' }).toLowerCase();
       const diaCapitalizado = diaActual.charAt(0).toUpperCase() + diaActual.slice(1);
@@ -142,56 +116,44 @@ export class HomePage implements OnInit, OnDestroy {
 
       this.mostrarComponente = false; 
       this.componentes = [];
-      
-      this.horarios.horario.forEach((hora) => {
-        hora.fecha_clase.forEach((casa) => {
-          if (casa.dia && this.verificarDiaYHoraClase(casa.dia, diaActual)) {
-            this.componentes.push(hora)
+
+      this.cursos.cursos.forEach(horarios => {
+        horarios.horario.forEach(fecha => {
+          if(fecha.dia && this.verificarDiaYHoraClase(fecha.dia, diaActual)){
+            this.componentes.push(horarios)
             this.mostrarComponente = true;
           }
-        });
-      });
-    }
+        })
+      })
 
-  });
-}
-
- obtenerNombreMes(numeroMes: number) {
-  const nombresMeses = [
-    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-    return nombresMeses[numeroMes];
+      console.log(this.componentes)
+      
+    })
   }
+
+  obtenerNombreMes(numeroMes: number) {
+    const nombresMeses = [
+      "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+      "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ];
+      return nombresMeses[numeroMes];
+    }
 
   verificarDiaYHoraClase(diaClase: string, diaActual: string): boolean {
     return diaClase.toLowerCase() === diaActual.toLowerCase();
   }
 
 
-  async takePicture () {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera
-    });
-  
-    // image.webPath will contain a path that can be set as an image src.
-    // You can access the original file using image.path, which can be
-    // passed to the Filesystem API to read the raw data of the image,
-    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    var imageUrl = image.webPath;
-  
-    // Can be set to the src of an image now
-    // imageElement.src = imageUrl;
-  };
-  
 
 
 
+  itemClicked(item: any) {
+    // Aquí puedes acceder al elemento seleccionado y realizar las acciones necesarias
+    console.log('Item seleccionado:', item);
+    
+    // También puedes navegar a otra página con los detalles del elemento, si es necesario.
+    // this.router.navigate(['/detalle', item.id]);
+  }
+
+  
 }
-
-
-
-

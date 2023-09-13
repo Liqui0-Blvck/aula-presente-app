@@ -72,6 +72,9 @@ ion-content {
     border-radius: 14px;
     padding: 14px;
     background: rgba(255, 255, 255, 0.8);
+
+    
+   
   }
 }
 
@@ -83,17 +86,25 @@ swiper-slide {
 }
 
 
+ion-card-header {
+  span {
+    margin: 0 auto;
+    ion-icon {
+      font-size: 200px; 
+    }
+  }
+}
+
 ion-card-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
 
 
-  span {
-    font-size: 30px;
-
-    ion-icon {
-      font-size: 30px;
-    }
+  ion-card-title {
+    font-size: 22px;
   }
+
 }

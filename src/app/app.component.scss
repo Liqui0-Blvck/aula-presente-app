@@ -148,6 +148,13 @@ ion-item.selected {
     --background-focused: rgba(127, 165, 230, 0.8);
     color: white;
   }
+}
 
 
+
+
+@media (min-width: 768px) {
+  ion-menu {
+    display: none;
+  }
 }

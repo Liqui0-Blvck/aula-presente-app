@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from './services/firestore.service';
 import { AuthenticationService } from './services/authentication.service';
-import { User } from './models';
+import { AppPage, User } from './models';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { register } from 'swiper/element/bundle';
@@ -17,11 +17,16 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public appPages = [
-    { title: 'Home', url: '/home', icon: 'mail' },
-    { title: 'Asistencias', url: '/asistencia', icon: 'paper-plane' },
-    { title: 'Horarios', url: '/asignaturas', icon: 'heart' },
-  ];
+  // public appPages = [
+  //   { title: 'Home', url: '/home', icon: 'mail' },
+  //   { title: 'Asistencias', url: '/asistencia', icon: 'paper-plane' },
+  //   { title: 'Horarios', url: '/horarios', icon: 'heart' },
+  // ];
+
+  appPages: AppPage[] = [];
+
+  rol: string = ''
+  
 
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
@@ -37,6 +42,7 @@ export class AppComponent implements OnInit {
     institucion: '',
     carrera: '',
     horario: '',
+    rol: '',
     datos_personales: {
       apellido: '',
       nombre: '',
@@ -85,6 +91,7 @@ export class AppComponent implements OnInit {
       email: '',
       fullname: '',
       institucion: '',
+      rol: '',
       carrera: '',
       horario: '',
       datos_personales: {
@@ -103,6 +110,7 @@ export class AppComponent implements OnInit {
     this.subscriberUserInfo = this.firebase.getDoc<User>(path, uid).subscribe(res => {
       if (res) {
         this.user = res;
+        this.roleRoutes(this.user.rol)
       }
     });
   }
@@ -114,4 +122,24 @@ export class AppComponent implements OnInit {
       this.session = false;
     }
   }
+
+
+  roleRoutes(role: string) {
+    const rolesRoutes: { [key: string]: AppPage[] } = {
+      estudiante: [
+        { title: 'Home', url: '/home', icon: 'mail' },
+        { title: 'Asistencias', url: '/asistencia', icon: 'paper-plane' },
+        { title: 'Horarios', url: '/horarios', icon: 'heart' },
+      ],
+      profesor: [
+        { title: 'Home', url: '/home-profesor', icon: 'mail' },
+        { title: 'Dashboard', url: '/dashboard', icon: 'star' }, // Ruta exclusiva para profesores
+        { title: 'Horarios', url: '/horarios', icon: 'heart' },
+      ],
+      // Agrega más roles y rutas según tus necesidades
+    };
+  
+    this.appPages = rolesRoutes[role] || [];
+  }
+
 }

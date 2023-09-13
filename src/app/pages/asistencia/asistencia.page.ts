@@ -25,7 +25,7 @@ export class AsistenciaPage implements OnInit {
 
   horarios: Horarios = {
     horario: [],
-    uid_student: ''
+    uid: ''
   }
 
   public uid = '';
@@ -40,6 +40,7 @@ export class AsistenciaPage implements OnInit {
     institucion: '',
     carrera: '',
     horario: '',
+    rol: '',
     datos_personales: {
       apellido: '',
       nombre: '',
@@ -96,6 +97,7 @@ export class AsistenciaPage implements OnInit {
       uid: '',
       email: '',
       fullname: '',
+      rol: '',
       institucion: '',
       carrera: '',
       horario: '',

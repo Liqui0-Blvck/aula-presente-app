@@ -13,29 +13,19 @@ ion-content {
     height: 90%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     overflow: hidden;
     overflow-y: scroll;
 
   }
-}
 
-.title-asistencia {
-  text-align: center;
-  background-color: #f1f5f8;
-}
+  ion-list {
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(81, 81, 81, 0.169);
 
-
-.box-item{
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-
-  span {
-    position:relative;
-    right: 8px;
-    font-weight: bold;
   }
+
 }
 
 ion-item {
@@ -44,18 +34,6 @@ ion-item {
   --color: white;
 }
 
-ion-menu-button {
-  --color: rgba(45, 112, 229, 1)
-}
-
-ion-toolbar {
-  --background: white;
-  --border-color: white;
-}
-
-ion-buttons {
-  --background: black;
-}
 .item-accordion {
   margin: 5px;
   display: flex;
@@ -66,3 +44,4 @@ ion-buttons {
     --color: rgba(45, 112, 229, 1)
   }
 }
+

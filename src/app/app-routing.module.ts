@@ -30,6 +30,18 @@ const routes: Routes = [
   },  {
     path: 'detalles-cuenta',
     loadChildren: () => import('./pages/detalles-cuenta/detalles-cuenta.module').then( m => m.DetallesCuentaPageModule)
+  },
+  {
+    path: 'horarios',
+    loadChildren: () => import('./pages/horarios/horarios.module').then( m => m.HorariosPageModule)
+  },
+  {
+    path: 'home-profesor',
+    loadChildren: () => import('./pages/home-profesor/home-profesor.module').then( m => m.HomeProfesorPageModule)
+  },
+  {
+    path: 'barcode',
+    loadChildren: () => import('./pages/barcode/barcode.module').then( m => m.BarcodePageModule)
   }
 
 ];

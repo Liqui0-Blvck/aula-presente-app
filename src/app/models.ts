@@ -5,6 +5,7 @@ export interface User {
   institucion: string
   carrera: string
   horario: string
+  rol: string
   datos_personales: {
     apellido: string
     nombre: string
@@ -27,7 +28,33 @@ export interface Asignatura {
 
 export interface Horarios {
   horario: Horario[],
-  uid_student: string
+  uid: string
+}
+
+export interface HorarioCurso {
+  dia: string;
+  hora_inicio: string;
+  hora_fin: string;
+  aula: string;
+}
+
+export interface AsistenciaAlumno {
+  nombre: string;
+  asistencias: number;
+}
+
+export interface Curso {
+  codigo: string;
+  nombre: string;
+  descripcion: string;
+  horario: HorarioCurso[];
+  cantidad_alumnos: number;
+  asistencias_alumnos: AsistenciaAlumno[];
+}
+
+export interface Profesor {
+  uid: string;
+  cursos: Curso[];
 }
 
 
@@ -47,3 +74,9 @@ export interface Horario {
 }
 
 
+
+export interface AppPage {
+  title: string;
+  url: string;
+  icon: string;
+}

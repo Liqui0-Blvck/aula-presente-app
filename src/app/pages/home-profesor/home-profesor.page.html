@@ -29,24 +29,21 @@
   
 
     <div class="main">
-      <h1>{{ nombreDia }} {{ dia }} de {{ nombreMes }}</h1>
+      <h1></h1>
       <swiper-container [options]="{ slidesPerView: 3, loop: true }">
-        <swiper-slide *ngFor="let clase of componentes">
+        <swiper-slide *ngFor="let item of componentes" (click)="itemClicked(item)">
           <ion-card>
-            <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
             <ion-card-header>
-              <ion-card-title>{{ clase.curso }}</ion-card-title>
-              <ion-card-subtitle>{{ clase.codigo }}</ion-card-subtitle>
-            </ion-card-header>
-          
-            <ion-card-content>
-              <p>
-                {{ clase.profesor }}
-              </p>
-
               <span>
-                <ion-icon name="qr-code-outline" title="Barcode-Scanner" (click)="takePicture()"></ion-icon>
+                <ion-icon name="qr-code-outline" title="Barcode-Scanner" [routerLink]="['/barcode']"></ion-icon>
               </span>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-card-title>{{ item.descripcion }}</ion-card-title>
+              <ion-card-subtitle>{{ item.codigo }}</ion-card-subtitle>
+              <div *ngFor="let horario of item.horario">
+                <p></p>
+              </div>
             </ion-card-content>
           </ion-card>
         </swiper-slide>

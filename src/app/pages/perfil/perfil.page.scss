@@ -22,10 +22,11 @@ ion-content {
     background: #f1f5f8;
     padding: 4px 10px 20px 10px;
     border-radius: 0 0 58px 58px;
-    height: 450px;
+    height: 92%;
+    overflow-y: scroll;
 
     h1 {
-      padding-top: 20px;
+      padding-top: 10px;
       padding-left: 20px;
       font-size: 30px;
       font-weight: 600;
@@ -36,12 +37,12 @@ ion-content {
       position: relative;
       margin: 0 auto;
       margin-bottom: 20px;
-      top: 50px;
+      top: 10px;
       bottom: 0;
       left: 0;
       right: 0;
       width: 90%;
-      height: 520px;
+      height: 450px;
       background: white;
       border-radius: 20px;
       box-shadow: 10px 15px 20px 10px rgba(0, 0, 0, 0.275);

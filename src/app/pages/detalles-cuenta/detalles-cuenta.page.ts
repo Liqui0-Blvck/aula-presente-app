@@ -26,6 +26,7 @@ export class DetallesCuentaPage implements OnInit {
     fullname: '',
     institucion: '',
     carrera: '',
+    rol: '',
     horario: '',
     datos_personales: {
       apellido: '',
@@ -73,6 +74,7 @@ export class DetallesCuentaPage implements OnInit {
     this.user = {
       uid: '',
       email: '',
+      rol: '',
       fullname: '',
       institucion: '',
       carrera: '',

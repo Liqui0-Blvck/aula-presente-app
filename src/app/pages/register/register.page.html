@@ -17,7 +17,7 @@
           labelPlacement="floating"
           class="input"
           color="secondary"
-          formControlName="fullname"
+          formControlName="nombre"
 
           ></ion-input>
         <ion-icon name="person-outline"></ion-icon>
@@ -73,15 +73,12 @@
         <hr>
        </div>
 
-      <div class="btn-boxSign">
-        <ion-button>
-          <ion-icon name="logo-google"></ion-icon>
-        </ion-button>
-  
-        <ion-button>
-          <ion-icon name="logo-apple"></ion-icon>
-        </ion-button>
-      </div>
+
+       <ion-button (click)="signUpAsProfe()" class="btn-signIn">
+        Ingresar diferente
+      </ion-button>
+      <input type="hidden" formControlName="rol" />
+      
     </div>
 
     <div class="footer">

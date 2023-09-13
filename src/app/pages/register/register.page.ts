@@ -25,7 +25,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.regForm = this.formBuilder.group({
-      fullname: ['',[Validators.required]],
+      nombre: ['',[Validators.required]],
       email: ['',
       [
         Validators.required,
@@ -38,7 +38,8 @@ export class RegisterPage implements OnInit {
         Validators.required,
         Validators.pattern("(^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$)")
       ]
-      ]
+      ],
+      rol: ['estudiante']
     })
   }
 
@@ -54,15 +55,26 @@ export class RegisterPage implements OnInit {
       try {
         const user = await this.authService.registerUser(this.regForm.value.email, this.regForm.value.password);
         if (user) {
-          
+
           const userData = {
             uid: user.user?.uid,
-            fullname: this.regForm.value.fullname,
-            email: this.regForm.value.email
-          }
+            email: this.regForm.value.email,
+            datos_personales: {
+              cuidad: '',
+              apellido: '',
+              numero_celular: '',
+              direccion: '',
+              nombre: this.regForm.value.nombre,
+            },
+            institucion: '',
+            carrera: '',
+            rol: this.regForm.value.rol,
+            horario: '',
+          };
+
+          console.log(this.regForm.value.rol)
           const path = 'users'
           
-
           this.firebase.createDoc(userData, path, String(user.user?.uid))
 
           loading.dismiss();
@@ -83,4 +95,13 @@ export class RegisterPage implements OnInit {
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }
+
+  signUpAsProfe() {
+    const currentRole = this.regForm.get('rol')?.value;
+    const newRole = currentRole === 'estudiante' ? 'profesor' : 'estudiante';
+    this.regForm.get('rol')?.setValue(newRole);
+    console.log('Rol actual:', newRole);
+  }
+
+  
 }
