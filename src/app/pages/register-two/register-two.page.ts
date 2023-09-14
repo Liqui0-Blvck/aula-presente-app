@@ -9,12 +9,12 @@ import { User } from 'src/app/models';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
-  selector: 'app-detalles-cuenta',
-  templateUrl: './detalles-cuenta.page.html',
-  styleUrls: ['./detalles-cuenta.page.scss'],
+  selector: 'app-register-two',
+  templateUrl: './register-two.page.html',
+  styleUrls: ['./register-two.page.scss'],
 })
-export class DetallesCuentaPage implements OnInit {
-  
+export class RegisterTwoPage implements OnInit {
+
   public uid = ''
   isUpdating = false; 
   userForm!: FormGroup
@@ -38,8 +38,6 @@ export class DetallesCuentaPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loadingCtrl: LoadingController,
-    private auth: AuthenticationService,
     private data: SharedService,
     private firebase: FirestoreService
   ) { }
@@ -59,10 +57,6 @@ export class DetallesCuentaPage implements OnInit {
 
         this.userForm.patchValue({
           nombre: this.user.datos_personales.nombre,
-          apellido: this.user.datos_personales.apellido,
-          direccion: this.user.datos_personales.direccion,
-          cuidad: this.user.datos_personales.cuidad,
-          celular: this.user.datos_personales.numero_celular
         });
       }
     })
@@ -115,6 +109,8 @@ export class DetallesCuentaPage implements OnInit {
             ...userData,
             datos_personales: datosPersonalesActuales
           };
+          
+          console.log(userData)
         
             this.firebase.updateDoc(userToUpdate, path, userToUpdate.uid)
               .then(() => {

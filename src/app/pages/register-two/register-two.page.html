@@ -1,0 +1,82 @@
+<ion-content [fullscreen]="true">
+
+  <section class="main">
+
+    <h1> Editar Informacion Personal</h1>
+
+    <div class="floating-card">
+      <ion-avatar>
+        <img src="/assets/img/219969.png" alt="picture user">
+      </ion-avatar>
+
+      <form [formGroup]="userForm">
+        <div class="box-form ion-padding">
+          <ion-item lines="none">
+            <ion-input
+              label="Nombre"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary"
+              [value]="user.datos_personales.nombre"
+              disabled="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              label="Apellidos"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary"
+              formControlName="apellido"
+              [value]="user.datos_personales.apellido"
+              >
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Ciudad"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary"
+              formControlName="cuidad"
+              [value]="user.datos_personales.cuidad">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Dirección"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary"
+              formControlName="direccion"
+              [value]="user.datos_personales.direccion">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none">
+            <ion-input
+              label="Celular"
+              type="text"
+              labelPlacement="floating"
+              class="input"
+              color="secondary"
+              formControlName="celular"
+              [value]="user.datos_personales.numero_celular">
+            </ion-input>
+          </ion-item>
+        </div>
+      </form>
+
+      <div class="buttons">
+        <ion-button (click)="updateUser()"> Guardar</ion-button>
+      </div>
+    </div>
+  </section>
+</ion-content>

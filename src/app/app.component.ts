@@ -38,7 +38,6 @@ export class AppComponent implements OnInit {
   user: User = {
     uid: '',
     email: '',
-    fullname: '',
     institucion: '',
     carrera: '',
     horario: '',
@@ -89,7 +88,6 @@ export class AppComponent implements OnInit {
     this.user = {
       uid: '',
       email: '',
-      fullname: '',
       institucion: '',
       rol: '',
       carrera: '',

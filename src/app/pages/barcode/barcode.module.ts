@@ -8,6 +8,7 @@ import { BarcodePageRoutingModule } from './barcode-routing.module';
 
 import { BarcodePage } from './barcode.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,6 @@ import { BarcodePage } from './barcode.page';
     IonicModule,
     BarcodePageRoutingModule
   ],
-  declarations: [BarcodePage]
+  declarations: [BarcodePage],
 })
 export class BarcodePageModule {}

@@ -33,22 +33,7 @@ export class AsistenciaPage implements OnInit {
 
   carrera!: string;
 
-  user: User = {
-    uid: '',
-    email: '',
-    fullname: '',
-    institucion: '',
-    carrera: '',
-    horario: '',
-    rol: '',
-    datos_personales: {
-      apellido: '',
-      nombre: '',
-      direccion: '',
-      cuidad: '',
-      numero_celular: ''
-    }
-  };
+  user!: User;
 
   subscriberUserInfo!: Subscription;
   
@@ -96,7 +81,6 @@ export class AsistenciaPage implements OnInit {
     this.user = {
       uid: '',
       email: '',
-      fullname: '',
       rol: '',
       institucion: '',
       carrera: '',

@@ -72,7 +72,7 @@ export class LoginPage implements OnInit {
           } else if (this.rol === 'profesor') {
 
             const profeData = {
-              "uid": "BoxZF3Kn0rMCmOjfeO1fRE6BJfk2",
+              "uid": "W9Atxt7FLRTC2GjpIcjPJ00djvW2",
               "cursos": [
                 {
                   "codigo": "CSY4111",
@@ -203,8 +203,9 @@ export class LoginPage implements OnInit {
               ]
             }
             
+            // const uide = 'BoxZF3Kn0rMCmOjfeO1fRE6BJfk2'
 
-            // this.firestore.createDoc(profeData,'horarios', 'BoxZF3Kn0rMCmOjfeO1fRE6BJfk2')
+            // this.firestore.createDoc(profeData,'horarios', 'W9Atxt7FLRTC2GjpIcjPJ00djvW2')
             this.router.navigate(['/home-profesor']);
           } else {
             // Rol desconocido o no manejado, puedes redirigir a una página de error o manejarlo de otra manera
@@ -212,7 +213,6 @@ export class LoginPage implements OnInit {
 
 
           loading.dismiss()
-          // this.router.navigate(['/home'])
         })
 
       } catch(error) {
@@ -220,7 +220,6 @@ export class LoginPage implements OnInit {
         loading.dismiss()
       }
     } else {
-      // Campos no válidos, muestra un mensaje de error.
       this.setOpen(true)
       loading.dismiss()
     }
@@ -230,7 +229,7 @@ export class LoginPage implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
-  async loginProfe(){
+  loginProfe(){
     this.rol = this.rol === 'estudiante' ? 'profesor' : 'estudiante';
     console.log(this.rol)
   }

@@ -1,7 +1,6 @@
 export interface User {
   uid: string
   email: string
-  fullname: string
   institucion: string
   carrera: string
   horario: string

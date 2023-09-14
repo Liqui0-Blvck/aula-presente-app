@@ -27,7 +27,6 @@ export class HomePage implements OnInit, OnDestroy {
   user: User = {
     uid: '',
     email: '',
-    fullname: '',
     institucion: '',
     carrera: '',
     horario: '',
@@ -81,7 +80,6 @@ export class HomePage implements OnInit, OnDestroy {
     this.user = {
       uid: '',
       email: '',
-      fullname: '',
       institucion: '',
       carrera: '',
       horario: '',

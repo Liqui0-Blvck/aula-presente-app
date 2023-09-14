@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { LoadingController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Profesor, User } from 'src/app/models';
+import { Curso, HorarioCurso, Profesor, User } from 'src/app/models';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -12,6 +14,7 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './home-profesor.page.html',
   styleUrls: ['./home-profesor.page.scss'],
 })
+
 export class HomeProfesorPage implements OnInit {
   public uid = '';
   public instituto = '';
@@ -30,7 +33,6 @@ export class HomeProfesorPage implements OnInit {
   user: User = {
     uid: '',
     email: '',
-    fullname: '',
     institucion: '',
     carrera: '',
     horario: '',
@@ -47,9 +49,11 @@ export class HomeProfesorPage implements OnInit {
   mostrarComponente!: boolean;
 
   constructor(
+    public loadingCtrl: LoadingController,
     private auth: AuthenticationService,
     private firebase: FirestoreService,
-    private data: SharedService
+    private data: SharedService,
+    private router: Router
   ) {
     this.auth.stateAuth().subscribe((res) => {
       if (res !== null) {
@@ -69,7 +73,6 @@ export class HomeProfesorPage implements OnInit {
     this.user = {
       uid: '',
       email: '',
-      fullname: '',
       institucion: '',
       carrera: '',
       horario: '',
@@ -106,8 +109,7 @@ export class HomeProfesorPage implements OnInit {
     this.firebase.getDoc<Profesor>(path, curso_id).subscribe(res => {
       if(res){
         this.cursos = res
-        this.data.setCursos(res)
-        console.log(res)
+        this.data.setProfesor(res)
       }
 
       const diaActual = new Date().toLocaleDateString('es-US', { weekday: 'long' }).toLowerCase();
@@ -125,9 +127,6 @@ export class HomeProfesorPage implements OnInit {
           }
         })
       })
-
-      console.log(this.componentes)
-      
     })
   }
 
@@ -144,15 +143,45 @@ export class HomeProfesorPage implements OnInit {
   }
 
 
+  async itemClicked(item: Curso) {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    // Realizar la actualización en la lista
+    console.log(item)
+    const dataToUpdate = this.componentes.map((element) => {
+      if (element.codigo === item.codigo) {
 
+        const suma = element.cantidad_alumnos + 1;
+        return {
+          ...element,
+          cantidad_alumnos: suma,
+        };
+      } else {
 
+        return element;
+      }
+    });
 
-  itemClicked(item: any) {
-    // Aquí puedes acceder al elemento seleccionado y realizar las acciones necesarias
-    console.log('Item seleccionado:', item);
+    this.data.setCurso(item)
     
+
+    this.cursos.cursos = dataToUpdate
+    // const path = 'horarios'
+
+    
+  
+    // Asegúrate de actualizar los datos en Firebase si es necesario
+    // this.firebase.updateDoc(this.cursos, path, this.user.uid)
+    // .then(() => {
+    //   console.log('Datos personales actualizados con éxito');
+    // })
+    // .catch((error) => {
+    //   console.error('Error al actualizar datos personales:', error);
+    // });
+  
     // También puedes navegar a otra página con los detalles del elemento, si es necesario.
-    // this.router.navigate(['/detalle', item.id]);
+    loading.dismiss();
+    this.router.navigate(['/barcode']);
   }
 
   

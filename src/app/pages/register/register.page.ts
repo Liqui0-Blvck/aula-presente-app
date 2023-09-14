@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { User } from 'src/app/models';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+
 
   regForm!: FormGroup;
 
@@ -21,6 +24,7 @@ export class RegisterPage implements OnInit {
     public loadingCtrl: LoadingController,
     public authService: AuthenticationService,
     public firebase: FirestoreService,
+    private data: SharedService,
     public router: Router) { }
 
   ngOnInit() {
@@ -54,10 +58,9 @@ export class RegisterPage implements OnInit {
     if (this.regForm?.valid) {
       try {
         const user = await this.authService.registerUser(this.regForm.value.email, this.regForm.value.password);
-        if (user) {
-
+        if (user && user.user)  {
           const userData = {
-            uid: user.user?.uid,
+            uid: user.user.uid,
             email: this.regForm.value.email,
             datos_personales: {
               cuidad: '',
@@ -77,8 +80,10 @@ export class RegisterPage implements OnInit {
           
           this.firebase.createDoc(userData, path, String(user.user?.uid))
 
+          this.data.setUser(userData)
+
           loading.dismiss();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/register-two']);
         } else {
           // Mostrar un mensaje de error al usuario si el registro no tiene éxito.
           console.log('No se pudo registrar al usuario.');
@@ -90,6 +95,8 @@ export class RegisterPage implements OnInit {
         loading.dismiss();
       }
     }
+
+    loading.dismiss()
   }
 
   togglePasswordVisibility() {
