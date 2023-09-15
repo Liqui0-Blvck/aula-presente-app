@@ -1,8 +1,8 @@
 ion-content {
   height: 100%;
   overflow-y:scroll;
+
   h1 {
-      margin-top: 50px;
       padding-left: 10px;
   }
 
@@ -17,7 +17,7 @@ ion-content {
     background: #f1f5f8;
     padding: 4px 10px 20px 10px;
     border-radius: 0 0 58px 58px;
-    height: 80%;
+    height: 90%;
     
 
 
@@ -32,7 +32,7 @@ ion-content {
       height: 600px;
       background: white;
       border-radius: 20px;
-      box-shadow: 10px 15px 20px 10px rgba(0, 0, 0, 0.275);
+      box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.275);
 
       .box-form {
           display: flex;
@@ -67,17 +67,20 @@ ion-content {
 
 
   .buttons {
-      display: flex;
-      justify-content: space-between;
-      position: relative;
-      top: 50px;
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
 
-      ion-button {
-          width: 50%;
-          --background: white;
-          --color: brgba(45, 112, 229, 1);
+    ion-button {
+        width: 100%;
+        --background: rgba(45, 112, 229, 1);
+        --color: white;
 
-          --background-hover: rgba(45, 113, 229, 0.496);
-      }
+        --background-hover: rgba(45, 113, 229, 0.079);
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
   }
 }

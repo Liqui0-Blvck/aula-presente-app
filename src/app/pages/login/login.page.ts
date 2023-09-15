@@ -4,7 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { Profesor } from 'src/app/models';
+import Swal from 'sweetalert2'
 
 
 @Component({
@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
   hidePassword: boolean = true;
 
   rol: string = 'profesor'
-  userRol: string = ''
   
 
   constructor(
@@ -65,10 +64,18 @@ export class LoginPage implements OnInit {
     if(this.logForm?.valid) {
       try {
         const user = await this.authServices.loginUser(this.logForm.value.email, this.logForm.value.password).then(async res => {
-          console.log(this.userRol)
 
           if (this.rol === 'estudiante') {
-            this.router.navigate(['/home']);
+            Swal.fire({
+              text: 'Correcto inicio de sesion',
+              icon: 'success',
+              heightAuto: false,
+              position: 'bottom',
+              timer: 1000
+            })
+            .then(() => {
+              this.router.navigate(['/home']);
+            })
           } else if (this.rol === 'profesor') {
 
             const profeData = {
@@ -206,17 +213,30 @@ export class LoginPage implements OnInit {
             // const uide = 'BoxZF3Kn0rMCmOjfeO1fRE6BJfk2'
 
             // this.firestore.createDoc(profeData,'horarios', 'W9Atxt7FLRTC2GjpIcjPJ00djvW2')
-            this.router.navigate(['/home-profesor']);
+            Swal.fire({
+              text: 'Correcto inicio de sesion',
+              icon: 'success',
+              heightAuto: false,
+              position: 'bottom',
+              timer: 1000
+            })
+            .then(() => {
+              this.router.navigate(['/home-profesor']);
+            })
           } else {
             // Rol desconocido o no manejado, puedes redirigir a una página de error o manejarlo de otra manera
           }
-
-
+          
           loading.dismiss()
         })
 
       } catch(error) {
-        console.log(error)
+        Swal.fire({
+          text: 'Usuario no encontrado',
+          icon: 'error',
+          timer: 1000,
+          heightAuto: false
+        })
         loading.dismiss()
       }
     } else {

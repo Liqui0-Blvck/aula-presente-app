@@ -2,7 +2,7 @@ ion-content {
     height: 100%;
     overflow-y:scroll;
     h1 {
-        margin-top: 50px;
+        margin-top: 40px;
         padding-left: 10px;
     }
 
@@ -17,14 +17,14 @@ ion-content {
       background: #f1f5f8;
       padding: 4px 10px 20px 10px;
       border-radius: 0 0 58px 58px;
-      height: 80%;
+      height: 90%;
       
 
 
     .floating-card {
         position: relative;
         margin: 0 auto;
-        top: 50px;
+        top: 30px;
         bottom: 0;
         left: 0;
         right: 0;
@@ -32,7 +32,7 @@ ion-content {
         height: 600px;
         background: white;
         border-radius: 20px;
-        box-shadow: 10px 15px 20px 10px rgba(0, 0, 0, 0.275);
+        box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.275);
 
         .box-form {
             display: flex;
@@ -74,8 +74,8 @@ ion-content {
 
         ion-button {
             width: 50%;
-            --background: white;
-            --color: brgba(45, 112, 229, 1);
+            --background: rgba(45, 112, 229, 1);
+            --color: white;
 
             --background-hover: rgba(45, 113, 229, 0.496);
         }
