@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Horario, Horarios } from 'src/app/models';
+import { Horario, Horarios, Profesor, User } from 'src/app/models';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class HorariosPage implements OnInit {
     uid: ''
   }
 
-  
+  curso!: Profesor  
 
   constructor(
     private data: SharedService
@@ -28,39 +28,81 @@ export class HorariosPage implements OnInit {
 
   ngOnInit() {
 
-    this.data.getHorarios().subscribe((horario) => {
-      if(horario) {
-        this.horarios = horario;
-
-        console.log(horario)
-
-        const horariosPorDia: { [key: string]: any[] } = {};
-        
-        console.log(horario)
-        this.horarios.horario.forEach((hora) => {
-          hora.fecha_clase.forEach((clase) => {
-            if (clase.dia) {
-
-              const diaLowerCase = clase.dia.toLowerCase();
+    this.data.getUser().subscribe((res) => {
+      if(res){
+        const rol = res.rol
+        console.log(rol)
+        if (rol === 'estudiante'){
+          this.data.getHorarios().subscribe((horario) => {
+            if(horario) {
+              this.horarios = horario;
     
-
-              if (!horariosPorDia[diaLowerCase]) {
-                horariosPorDia[diaLowerCase] = [];
-              }
-              horariosPorDia[diaLowerCase].push(hora);
-            }
-          });
+              console.log(horario)
+              const horariosPorDia: { [key: string]: any[] } = {};
+              
+              console.log(horario)
+              this.horarios.horario.forEach((hora) => {
+                hora.fecha_clase.forEach((clase) => {
+                  if (clase.dia) {
+      
+                    const diaLowerCase = clase.dia.toLowerCase();
           
-        });
-        
-        this.componentes = {}
+      
+                    if (!horariosPorDia[diaLowerCase]) {
+                      horariosPorDia[diaLowerCase] = [];
+                    }
+                    horariosPorDia[diaLowerCase].push(hora);
+                  }
+                });
+                
+              });
+              
+              this.componentes = {}
+      
+              this.diasSemana.forEach((dia) => {
+                if (horariosPorDia[dia.toLowerCase()]) {
+                  this.componentes[dia] = horariosPorDia[dia.toLowerCase()];
+                }
+              });
+         
+            }
+          })
+        } else if (rol === 'profesor') {
+          this.data.getProfesor().subscribe((horario) => {
+            if(horario) {
+              this.curso = horario;
 
-        this.diasSemana.forEach((dia) => {
-          if (horariosPorDia[dia.toLowerCase()]) {
-            this.componentes[dia] = horariosPorDia[dia.toLowerCase()];
-          }
-        });
-   
+              console.log(horario)
+      
+              const horariosPorDia: { [key: string]: any[] } = {};
+              
+              this.curso.cursos.forEach((hora) => {
+                hora.horario.forEach((clase) => {
+                  if (clase.dia) {
+      
+                    const diaLowerCase = clase.dia.toLowerCase();
+          
+      
+                    if (!horariosPorDia[diaLowerCase]) {
+                      horariosPorDia[diaLowerCase] = [];
+                    }
+                    horariosPorDia[diaLowerCase].push(hora);
+                  }
+                });
+                
+              });
+              
+              this.componentes = {}
+      
+              this.diasSemana.forEach((dia) => {
+                if (horariosPorDia[dia.toLowerCase()]) {
+                  this.componentes[dia] = horariosPorDia[dia.toLowerCase()];
+                }
+              });
+         
+            }
+          })
+        }
       }
     })
   }

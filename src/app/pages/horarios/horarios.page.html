@@ -3,7 +3,6 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Horarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +20,7 @@
           <div class="item-accordion" slot="content">
             <div *ngFor="let clase of componentes[dia]">            
                <ion-item lines="none">
-                  {{ clase.curso }}
+                  {{ clase.curso }} {{ clase.nombre }}
                </ion-item>
             </div>
           </div>
