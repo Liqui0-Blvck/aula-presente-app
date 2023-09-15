@@ -4,18 +4,8 @@
       <ion-img src="/assets//img/aula-presente-rounded.png"/>
     </div>
     <ion-title>Bienvenido</ion-title>
-    <p>Ingresa a tu cuenta</p>
-    <p>{{ rol }}</p>
+    <p>Ingresa a tu cuenta {{ rol }}</p>
   </div>
-
-  <ion-alert
-  [isOpen]="isAlertOpen"
-  header="Aviso"
-  subHeader="Important message"
-  message="Debes llenar la información"
-  [buttons]="alertButton"
-  (didDismiss)="setOpen(false)"
-  ></ion-alert>
 
   <form [formGroup]="logForm" >
     <div class="ion-padding">

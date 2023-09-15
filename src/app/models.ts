@@ -47,9 +47,14 @@ export interface Curso {
   nombre: string;
   descripcion: string;
   horario: HorarioCurso[];
-  cantidad_alumnos: number;
-  asistencias_alumnos: AsistenciaAlumno[];
+  asistenciaActual: number; // Número de asistencias registradas hasta el momento
+  alumnosInscritos: Alumno[];
 }
+
+// export interface Profesor {
+//   uid: string;
+//   cursos: Clase[];
+// }
 
 export interface Profesor {
   uid: string;
@@ -78,4 +83,11 @@ export interface AppPage {
   title: string;
   url: string;
   icon: string;
+}
+
+export interface Alumno {
+  uid: string;           // Identificador único del alumno
+  nombre: string;        // Nombre completo del alumno
+  asistencias: number;   // Número de clases a las que ha asistido
+  estadoAsistencia: boolean;  // Registro de asistencia (true para asistencia, false para ausencia)
 }

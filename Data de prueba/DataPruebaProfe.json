@@ -1,5 +1,5 @@
 {
-  "uid": "BoxZF3Kn0rMCmOjfeO1fRE6BJfk2",
+  "uid": "W9Atxt7FLRTC2GjpIcjPJ00djvW2",
   "cursos": [
     {
       "codigo": "CSY4111",
@@ -19,27 +19,97 @@
           "aula": "Aula 101"
         }
       ],
-      "cantidad_alumnos": 5,
-      "asistencias_alumnos": [
+      "asistenciasRegistradas": 5,
+      "alumnosInscritos": [
         {
-          "nombre": "Alumno 1",
-          "asistencias": 9
+          "uid": "1",
+          "nombre": "Juan Pérez",
+          "asistencias": 4,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 2",
-          "asistencias": 10
+          "uid": "2",
+          "nombre": "María Rodríguez",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 3",
-          "asistencias": 8
+          "uid": "3",
+          "nombre": "Carlos González",
+          "asistencias": 3,
+          "estadoAsistencia": false
         },
         {
-          "nombre": "Alumno 4",
-          "asistencias": 9
+          "uid": "4",
+          "nombre": "Ana López",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 5",
-          "asistencias": 7
+          "uid": "5",
+          "nombre": "Luis García",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "6",
+          "nombre": "Sofía Martínez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "7",
+          "nombre": "Javier Pérez",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "8",
+          "nombre": "Elena Torres",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "9",
+          "nombre": "Diego Sánchez",
+          "asistencias": 1,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "10",
+          "nombre": "Valentina Ramírez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "11",
+          "nombre": "Gabriel Silva",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "12",
+          "nombre": "Isabella López",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "13",
+          "nombre": "Mateo Rodríguez",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "14",
+          "nombre": "Lucía González",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "15",
+          "nombre": "David Pérez",
+          "asistencias": 3,
+          "estadoAsistencia": false
         }
       ]
     },
@@ -61,27 +131,97 @@
           "aula": "Aula 102"
         }
       ],
-      "cantidad_alumnos": 5,
-      "asistencias_alumnos": [
+      "asistenciasRegistradas": 5,
+      "alumnosInscritos": [
         {
-          "nombre": "Alumno 6",
-          "asistencias": 8
+          "uid": "16",
+          "nombre": "Paola Martínez",
+          "asistencias": 4,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 7",
-          "asistencias": 9
+          "uid": "17",
+          "nombre": "Fernando Sánchez",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 8",
-          "asistencias": 7
+          "uid": "18",
+          "nombre": "Renata López",
+          "asistencias": 3,
+          "estadoAsistencia": false
         },
         {
-          "nombre": "Alumno 9",
-          "asistencias": 10
+          "uid": "19",
+          "nombre": "Joaquín García",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 10",
-          "asistencias": 6
+          "uid": "20",
+          "nombre": "Camila Rodríguez",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "21",
+          "nombre": "Andrés González",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "22",
+          "nombre": "Sara Pérez",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "23",
+          "nombre": "Felipe Torres",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "24",
+          "nombre": "Laura Silva",
+          "asistencias": 1,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "25",
+          "nombre": "Juan Manuel Ramírez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "26",
+          "nombre": "María José Rodríguez",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "27",
+          "nombre": "Luisa González",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "28",
+          "nombre": "Daniel Pérez",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "29",
+          "nombre": "Valentín Martínez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "30",
+          "nombre": "Gabriela Sánchez",
+          "asistencias": 3,
+          "estadoAsistencia": false
         }
       ]
     },
@@ -103,28 +243,99 @@
           "aula": "Aula 103"
         }
       ],
-      "cantidad_alumnos": 5,
-      "asistencias_alumnos": [
+      "asistenciasRegistradas": 5,
+      "alumnosInscritos": [
         {
-          "nombre": "Alumno 11",
-          "asistencias": 9
+          "uid": "31",
+          "nombre": "Emilio González",
+          "asistencias": 4,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 12",
-          "asistencias": 8
+          "uid": "32",
+          "nombre": "Catalina López",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 13",
-          "asistencias": 7
+          "uid": "33",
+          "nombre": "Lucas Pérez",
+          "asistencias": 3,
+          "estadoAsistencia": false
         },
         {
-          "nombre": "Alumno 14",
-          "asistencias": 10
+          "uid": "34",
+          "nombre": "Daniela Sánchez",
+          "asistencias": 5,
+          "estadoAsistencia": true
         },
         {
-          "nombre": "Alumno 15",
-          "asistencias": 6
+          "uid": "35",
+          "nombre": "Mateo Rodríguez",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "36",
+          "nombre": "Valentina Martínez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "37",
+          "nombre": "Santiago Torres",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "38",
+          "nombre": "Isabella González",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "39",
+          "nombre": "Diego López",
+          "asistencias": 1,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "40",
+          "nombre": "Mariana García",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "41",
+          "nombre": "Sebastián Pérez",
+          "asistencias": 3,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "42",
+          "nombre": "Valeria Sánchez",
+          "asistencias": 2,
+          "estadoAsistencia": false
+        },
+        {
+          "uid": "43",
+          "nombre": "Juan Manuel Rodríguez",
+          "asistencias": 5,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "44",
+          "nombre": "Julieta Martínez",
+          "asistencias": 4,
+          "estadoAsistencia": true
+        },
+        {
+          "uid": "45",
+          "nombre": "Pablo Torres",
+          "asistencias": 3,
+          "estadoAsistencia": false
         }
+        
       ]
     }
   ]

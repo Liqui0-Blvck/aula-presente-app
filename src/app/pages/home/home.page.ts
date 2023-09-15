@@ -24,21 +24,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   public showCard!: false;
 
-  user: User = {
-    uid: '',
-    email: '',
-    institucion: '',
-    carrera: '',
-    horario: '',
-    rol: '',
-    datos_personales: {
-      apellido: '',
-      nombre: '',
-      direccion: '',
-      cuidad: '',
-      numero_celular: ''
-    }
-  };
+  user!: User
 
   carrera: Carrera = {
     asignaturas: [],

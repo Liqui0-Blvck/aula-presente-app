@@ -13,17 +13,10 @@ import Swal from 'sweetalert2'
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  isAlertOpen = false;
-  public alertButton = ['OK']
-
   logForm!: FormGroup
 
-  setOpen(isOpen: boolean){
-    this.isAlertOpen = isOpen
-    console.log(this.isAlertOpen)
-  }
-
+  
+  
   hidePassword: boolean = true;
 
   rol: string = 'profesor'
@@ -31,11 +24,9 @@ export class LoginPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private loadingCtrl: LoadingController,
     private authServices: AuthenticationService,
     private router: Router,
     private firestore: FirestoreService
-
   ) { }
 
   ngOnInit() {
@@ -58,8 +49,6 @@ export class LoginPage implements OnInit {
 
 
   async login(){
-    const loading = await this.loadingCtrl.create();
-    await loading.present();
 
     if(this.logForm?.valid) {
       try {
@@ -78,141 +67,8 @@ export class LoginPage implements OnInit {
             })
           } else if (this.rol === 'profesor') {
 
-            const profeData = {
-              "uid": "W9Atxt7FLRTC2GjpIcjPJ00djvW2",
-              "cursos": [
-                {
-                  "codigo": "CSY4111",
-                  "nombre": "Calidad de Software",
-                  "descripcion": "Curso de Calidad de Software",
-                  "horario": [
-                    {
-                      "dia": "lunes",
-                      "hora_inicio": "09:00",
-                      "hora_fin": "11:00",
-                      "aula": "Aula 101"
-                    },
-                    {
-                      "dia": "miércoles",
-                      "hora_inicio": "09:00",
-                      "hora_fin": "11:00",
-                      "aula": "Aula 101"
-                    }
-                  ],
-                  "cantidad_alumnos": 5,
-                  "asistencias_alumnos": [
-                    {
-                      "nombre": "Alumno 1",
-                      "asistencias": 9
-                    },
-                    {
-                      "nombre": "Alumno 2",
-                      "asistencias": 10
-                    },
-                    {
-                      "nombre": "Alumno 3",
-                      "asistencias": 8
-                    },
-                    {
-                      "nombre": "Alumno 4",
-                      "asistencias": 9
-                    },
-                    {
-                      "nombre": "Alumno 5",
-                      "asistencias": 7
-                    }
-                  ]
-                },
-                {
-                  "codigo": "INU2101",
-                  "nombre": "Ingles Basico II",
-                  "descripcion": "Curso de Ingles Basico II",
-                  "horario": [
-                    {
-                      "dia": "martes",
-                      "hora_inicio": "14:00",
-                      "hora_fin": "16:00",
-                      "aula": "Aula 102"
-                    },
-                    {
-                      "dia": "jueves",
-                      "hora_inicio": "14:00",
-                      "hora_fin": "16:00",
-                      "aula": "Aula 102"
-                    }
-                  ],
-                  "cantidad_alumnos": 5,
-                  "asistencias_alumnos": [
-                    {
-                      "nombre": "Alumno 6",
-                      "asistencias": 8
-                    },
-                    {
-                      "nombre": "Alumno 7",
-                      "asistencias": 9
-                    },
-                    {
-                      "nombre": "Alumno 8",
-                      "asistencias": 7
-                    },
-                    {
-                      "nombre": "Alumno 9",
-                      "asistencias": 10
-                    },
-                    {
-                      "nombre": "Alumno 10",
-                      "asistencias": 6
-                    }
-                  ]
-                },
-                {
-                  "codigo": "BIY7121",
-                  "nombre": "Minería de Datos",
-                  "descripcion": "Curso de Minería de Datos",
-                  "horario": [
-                    {
-                      "dia": "miércoles",
-                      "hora_inicio": "16:00",
-                      "hora_fin": "18:00",
-                      "aula": "Aula 103"
-                    },
-                    {
-                      "dia": "viernes",
-                      "hora_inicio": "16:00",
-                      "hora_fin": "18:00",
-                      "aula": "Aula 103"
-                    }
-                  ],
-                  "cantidad_alumnos": 5,
-                  "asistencias_alumnos": [
-                    {
-                      "nombre": "Alumno 11",
-                      "asistencias": 9
-                    },
-                    {
-                      "nombre": "Alumno 12",
-                      "asistencias": 8
-                    },
-                    {
-                      "nombre": "Alumno 13",
-                      "asistencias": 7
-                    },
-                    {
-                      "nombre": "Alumno 14",
-                      "asistencias": 10
-                    },
-                    {
-                      "nombre": "Alumno 15",
-                      "asistencias": 6
-                    }
-                  ]
-                }
-              ]
-            }
-            
-            // const uide = 'BoxZF3Kn0rMCmOjfeO1fRE6BJfk2'
+            // this.firestore.deleteDoc('horarios', 'W9Atxt7FLRTC2GjpIcjPJ00djvW2')
 
-            // this.firestore.createDoc(profeData,'horarios', 'W9Atxt7FLRTC2GjpIcjPJ00djvW2')
             Swal.fire({
               text: 'Correcto inicio de sesion',
               icon: 'success',
@@ -226,8 +82,6 @@ export class LoginPage implements OnInit {
           } else {
             // Rol desconocido o no manejado, puedes redirigir a una página de error o manejarlo de otra manera
           }
-          
-          loading.dismiss()
         })
 
       } catch(error) {
@@ -237,11 +91,15 @@ export class LoginPage implements OnInit {
           timer: 1000,
           heightAuto: false
         })
-        loading.dismiss()
       }
     } else {
-      this.setOpen(true)
-      loading.dismiss()
+
+      Swal.fire({
+        text: 'Debes ingresar datos para ingresar',
+        icon: 'error',
+        timer: 1500,
+        heightAuto: false
+      })
     }
   }
 

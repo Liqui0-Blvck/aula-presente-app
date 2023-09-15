@@ -32,6 +32,8 @@ export class HorariosPage implements OnInit {
       if(horario) {
         this.horarios = horario;
 
+        console.log(horario)
+
         const horariosPorDia: { [key: string]: any[] } = {};
         
         console.log(horario)

@@ -10,14 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarcodePage implements OnInit {
   
-  item: Curso = {
-    codigo: '',
-    nombre: '',
-    descripcion: '',
-    horario: [],
-    cantidad_alumnos: 0,
-    asistencias_alumnos: []
-  }
+  item!: Curso
 
   constructor(
     private data: SharedService,
@@ -30,8 +23,8 @@ export class BarcodePage implements OnInit {
 
     this.data.getCurso().subscribe(res => {
       if(res){
-        const { nombre, codigo, descripcion, cantidad_alumnos } = res
-        const itemJson = JSON.stringify({nombre, codigo, descripcion, cantidad_alumnos})
+        const { nombre, codigo, descripcion,  } = res
+        const itemJson = JSON.stringify({nombre, codigo, descripcion})
 
         const urlEncodedText = encodeURIComponent(itemJson);
 

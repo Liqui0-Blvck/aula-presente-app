@@ -133,6 +133,7 @@ export class AppComponent implements OnInit {
         { title: 'Home', url: '/home-profesor', icon: 'mail' },
         { title: 'Dashboard', url: '/dashboard', icon: 'star' }, // Ruta exclusiva para profesores
         { title: 'Horarios', url: '/horarios', icon: 'heart' },
+        { title: 'Alumnos', url: '/alumnos', icon: 'people'}
       ],
       // Agrega más roles y rutas según tus necesidades
     };

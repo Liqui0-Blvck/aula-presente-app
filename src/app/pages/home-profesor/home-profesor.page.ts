@@ -45,6 +45,8 @@ export class HomeProfesorPage implements OnInit {
       numero_celular: ''
     }
   };
+
+  
   subscriberUserInfo!: Subscription;
   mostrarComponente!: boolean;
 
