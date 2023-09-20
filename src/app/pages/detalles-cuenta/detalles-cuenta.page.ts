@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { User } from 'src/app/models';
 import { SharedService } from 'src/app/services/shared.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-detalles-cuenta',
@@ -124,7 +125,16 @@ export class DetallesCuentaPage implements OnInit {
               .catch((error) => {
                 console.error('Error al actualizar datos personales:', error);
               });
+
+          Swal.fire({
+            text: 'Cambios guardado con exito',
+            icon: 'success',
+            heightAuto: false,
+            timer: 1500,
+            position: 'bottom'
+          })
         }
+
 
     else {
       console.error('El documento del usuario no se encontró.');

@@ -123,7 +123,7 @@ export class HomeProfesorPage implements OnInit {
 
       this.cursos.cursos.forEach(horarios => {
         horarios.horario.forEach(fecha => {
-          if(fecha.dia && this.verificarDiaYHoraClase(fecha.dia, diaActual)){
+          if(fecha.dia && this.verificarDiaYHoraClase(fecha.dia, 'viernes')){
             this.componentes.push(horarios)
             this.mostrarComponente = true;
           }

@@ -43,14 +43,19 @@ const routes: Routes = [
   {
     path: 'barcode',
     loadChildren: () => import('./pages/barcode/barcode.module').then( m => m.BarcodePageModule)
-  },  {
+  },
+  {
     path: 'register-two',
     loadChildren: () => import('./pages/register-two/register-two.module').then( m => m.RegisterTwoPageModule)
   },
   {
     path: 'alumnos',
     loadChildren: () => import('./pages/alumnos/alumnos.module').then( m => m.AlumnosPageModule)
+  },  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   }
+
 
 
 

@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="header-btn">
+    <ion-button *ngFor="let curso of cursos.cursos" (click)="seleccionarClase(curso)">{{ curso.nombre }}</ion-button>
+  </div>
+
+  <div class="info-cards">
+    <div>
+      <h1>Cursos</h1>
+      <p>{{ countCursos }}</p>
+    </div>
+    <div>
+      <h1>Alumnos</h1>
+      <p>{{ countAlumnos }}</p>
+    </div>
+    <div>
+      <h1>Situación RI</h1>
+      <p>{{ countAlumnosRi }}</p>
+    </div>
+    <div>Algo 4</div>
+  </div>
+
+  <div class="chart">
+    <apx-chart *ngIf="options.chart 
+    && options.series 
+    && options.xaxis 
+    && options.plotOptions
+    && options.dataLabels
+    && options.yaxis
+    && options.title"
+    [title]="options.title" 
+    [chart]="options.chart" 
+    [xaxis]="options.xaxis"
+    [yaxis]="options.yaxis"
+    [series]="options.series"
+    [plotOptions]="options.plotOptions"
+    [dataLabels]="options.dataLabels"></apx-chart>
+  </div>
+
+</ion-content>

@@ -6,15 +6,10 @@ ion-content {
         padding-left: 10px;
     }
 
-    --background: linear-gradient(
-      90deg,
-      rgba(43, 90, 148, 1) 0%,
-      rgba(45, 112, 229, 1) 35%,
-      rgba(45, 112, 229, 1) 100%
-    );
+    --background: #f1f5f8;
   
     .main {
-      background: #f1f5f8;
+      --background: #f1f5f8;
       padding: 4px 10px 20px 10px;
       border-radius: 0 0 58px 58px;
       
@@ -74,8 +69,20 @@ ion-content {
 }
 
 
-@media screen and (max-width: 380px){
+@media screen and (min-height: 690px){
   ion-content {
-    --background: #f1f5f8;
+    --background: linear-gradient(
+      90deg,
+      rgba(43, 90, 148, 1) 0%,
+      rgba(45, 112, 229, 1) 35%,
+      rgba(45, 112, 229, 1) 100%
+    );
+
+    .main {
+      background: #f1f5f8;
+      padding: 4px 10px 20px 10px;
+      border-radius: 0 0 58px 58px;
+      height: 90vh;
+    }
   }
 }
