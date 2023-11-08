@@ -31,16 +31,13 @@ export class HorariosPage implements OnInit {
     this.data.getUser().subscribe((res) => {
       if(res){
         const rol = res.rol
-        console.log(rol)
         if (rol === 'estudiante'){
           this.data.getHorarios().subscribe((horario) => {
             if(horario) {
               this.horarios = horario;
-    
-              console.log(horario)
+
               const horariosPorDia: { [key: string]: any[] } = {};
               
-              console.log(horario)
               this.horarios.horario.forEach((hora) => {
                 hora.fecha_clase.forEach((clase) => {
                   if (clase.dia) {
@@ -71,8 +68,6 @@ export class HorariosPage implements OnInit {
           this.data.getProfesor().subscribe((horario) => {
             if(horario) {
               this.curso = horario;
-
-              console.log(horario)
       
               const horariosPorDia: { [key: string]: any[] } = {};
               

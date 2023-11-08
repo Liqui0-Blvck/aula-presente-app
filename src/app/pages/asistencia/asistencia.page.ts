@@ -57,7 +57,6 @@ export class AsistenciaPage implements OnInit {
   }
 
   async ngOnInit() {
-    const uid = await this.auth.getProfile()
 
     this.data.getUser().subscribe((user) => {
       if (user) {

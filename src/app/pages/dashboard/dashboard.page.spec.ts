@@ -5,7 +5,7 @@ describe('DashboardPage', () => {
   let component: DashboardPage;
   let fixture: ComponentFixture<DashboardPage>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     fixture = TestBed.createComponent(DashboardPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -15,3 +15,4 @@ describe('DashboardPage', () => {
     expect(component).toBeTruthy();
   });
 });
+

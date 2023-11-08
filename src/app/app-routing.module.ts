@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RoleGuard } from './guard/roleGuard.guard'
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
   },
   {
     path: 'register',
@@ -38,11 +39,13 @@ const routes: Routes = [
   },
   {
     path: 'home-profesor',
-    loadChildren: () => import('./pages/home-profesor/home-profesor.module').then( m => m.HomeProfesorPageModule)
+    loadChildren: () => import('./pages/home-profesor/home-profesor.module').then( m => m.HomeProfesorPageModule),
   },
   {
     path: 'barcode',
-    loadChildren: () => import('./pages/barcode/barcode.module').then( m => m.BarcodePageModule)
+    loadChildren: () => import('./pages/barcode/barcode.module').then( m => m.BarcodePageModule),
+    canActivate: [RoleGuard],
+    data: {expectedRole: 'profesor'}
   },
   {
     path: 'register-two',
@@ -50,10 +53,15 @@ const routes: Routes = [
   },
   {
     path: 'alumnos',
-    loadChildren: () => import('./pages/alumnos/alumnos.module').then( m => m.AlumnosPageModule)
-  },  {
+    loadChildren: () => import('./pages/alumnos/alumnos.module').then( m => m.AlumnosPageModule),
+    canActivate: [RoleGuard],
+    data: {expectedRole: 'profesor'}
+  },
+  {
     path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule),
+    canActivate: [RoleGuard],
+    data: {expectedRole: 'profesor'}
   }
 
 

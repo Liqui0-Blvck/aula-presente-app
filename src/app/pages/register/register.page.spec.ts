@@ -5,7 +5,7 @@ describe('RegisterPage', () => {
   let component: RegisterPage;
   let fixture: ComponentFixture<RegisterPage>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     fixture = TestBed.createComponent(RegisterPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -15,3 +15,7 @@ describe('RegisterPage', () => {
     expect(component).toBeTruthy();
   });
 });
+
+function async(arg0: () => void): jasmine.ImplementationCallback {
+  throw new Error('Function not implemented.');
+}

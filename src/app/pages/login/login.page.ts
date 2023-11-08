@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   hidePassword: boolean = true;
 
   rol: string = 'profesor'
-  
+  rolp: string = 'estudiante'
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       try {
         const user = await this.authServices.loginUser(this.logForm.value.email, this.logForm.value.password).then(async res => {
 
-          if (this.rol === 'estudiante') {
+          if (this.rolp === 'estudiante') {
             Swal.fire({
               text: 'Correcto inicio de sesion',
               icon: 'success',
@@ -65,24 +65,35 @@ export class LoginPage implements OnInit {
             .then(() => {
               this.router.navigate(['/home']);
             })
-          } else if (this.rol === 'profesor') {
-
-            // this.firestore.deleteDoc('horarios', 'W9Atxt7FLRTC2GjpIcjPJ00djvW2')
-
-            Swal.fire({
-              text: 'Correcto inicio de sesion',
-              icon: 'success',
-              heightAuto: false,
-              position: 'bottom',
-              timer: 1000
-            })
-            .then(() => {
-              this.router.navigate(['/home-profesor']);
-            })
           } else {
-            // Rol desconocido o no manejado, puedes redirigir a una página de error o manejarlo de otra manera
+            Swal.fire({
+              text: 'Usuario no encontrado',
+              icon: 'error',
+              timer: 1000,
+              heightAuto: false
+            })
           }
         })
+
+        if (this.rolp === 'profesor') {
+          Swal.fire({
+            text: 'Correcto inicio de sesion',
+            icon: 'success',
+            heightAuto: false,
+            position: 'bottom',
+            timer: 1000
+          })
+          .then(() => {
+            this.router.navigate(['/home-profesor']);
+          })
+        } else {
+          Swal.fire({
+            text: 'Usuario no encontrado',
+            icon: 'error',
+            timer: 1000,
+            heightAuto: false
+          })
+        }
 
       } catch(error) {
         Swal.fire({
@@ -109,7 +120,7 @@ export class LoginPage implements OnInit {
 
   loginProfe(){
     this.rol = this.rol === 'estudiante' ? 'profesor' : 'estudiante';
-    console.log(this.rol)
+    this.rolp = this.rolp === 'profesor' ? 'estudiante' : 'profesor'
   }
 
 }

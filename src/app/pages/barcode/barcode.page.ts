@@ -1,7 +1,11 @@
 
+import { HttpClient } from '@angular/common/http';
+
 import { Curso } from 'src/app/models';
 import { SharedService } from 'src/app/services/shared.service';
 import { Component, OnInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-barcode',

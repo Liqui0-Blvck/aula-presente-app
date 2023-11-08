@@ -5,7 +5,7 @@ describe('BarcodePage', () => {
   let component: BarcodePage;
   let fixture: ComponentFixture<BarcodePage>;
 
-  beforeEach(async(() => {
+  beforeEach((() => {
     fixture = TestBed.createComponent(BarcodePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
