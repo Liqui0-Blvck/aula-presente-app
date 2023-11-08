@@ -5,7 +5,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import Swal from 'sweetalert2'
-
+import { ModalController } from '@ionic/angular';
+import { ResetPasswordPage } from '../reset-password/reset-password.page';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private authServices: AuthenticationService,
     private router: Router,
-    private firestore: FirestoreService
+    private firestore: FirestoreService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -123,4 +125,10 @@ export class LoginPage implements OnInit {
     this.rolp = this.rolp === 'profesor' ? 'estudiante' : 'profesor'
   }
 
+  async openResetPasswordModal() {
+    const modal = await this.modalController.create({
+      component: ResetPasswordPage,
+    });
+    return await modal.present();
+  }
 }
