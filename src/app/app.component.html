@@ -5,7 +5,7 @@
         <ion-list id="labels-list">
           <div class="btns-session" >
             <ion-menu-toggle>
-              <ion-button routerDirection="root" routerLinkActive="selected" [routerLink]="['/login']" *ngIf="session" (click)="salir()" >Cerrar Sesión</ion-button>
+              <ion-button routerDirection="root" routerLinkActive="selected" *ngIf="session" (click)="salir()" >Cerrar Sesión</ion-button>
             </ion-menu-toggle>
 
             <div *ngIf="!session" class="btn-session">

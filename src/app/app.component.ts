@@ -118,6 +118,7 @@ export class AppComponent implements OnInit {
       await this.authServices.signOut()
       this.subscriberUserInfo.unsubscribe()
       this.session = false;
+      this.router.navigate(["/login"])
     }
   }
 

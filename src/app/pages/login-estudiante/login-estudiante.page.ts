@@ -13,11 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-login-estudiante',
+  templateUrl: './login-estudiante.page.html',
+  styleUrls: ['./login-estudiante.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginEstudiantePage implements OnInit {
+
   logForm!: FormGroup
 
   user: User = {
@@ -40,8 +41,8 @@ export class LoginPage implements OnInit {
   
   hidePassword: boolean = true;
 
-  rol: string = 'profesor'
-  rolp: string = 'estudiante'
+  rol: string = 'estudiante'
+  rolp: string = 'profesor'
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,16 +75,11 @@ export class LoginPage implements OnInit {
 
 
   async login(){
-
-    console.log(this.uid)
-
     if(this.logForm?.valid) {
       try {
         const profe = this.logForm.value.email.split("@")[1].includes("profe")
-        
         await this.authServices.loginUser(this.logForm.value.email, this.logForm.value.password).then(async res => {
-          
-          if (this.rol === 'profesor' && this.rolp === 'estudiante' && profe) {
+          if (this.rol === 'estudiante' && this.rolp === 'profesor' && !profe) {
               Swal.fire({
                 text: 'Correcto inicio de sesion',
                 icon: 'success',
@@ -92,7 +88,7 @@ export class LoginPage implements OnInit {
                 timer: 1000
               })
               .then(() => {
-                this.router.navigate(['/home-profesor']);
+                this.router.navigate(['/home']);
               })
             } else {
               Swal.fire({
@@ -130,7 +126,7 @@ export class LoginPage implements OnInit {
   }
 
   loginProfe(){
-    this.router.navigate(["/login-estudiante"])
+    this.router.navigate(["/login"])
   }
 
   async openResetPasswordModal() {
@@ -140,44 +136,3 @@ export class LoginPage implements OnInit {
     return await modal.present();
   }
 }
-
-// if (this.rolp === 'estudiante') {
-//   Swal.fire({
-//     text: 'Correcto inicio de sesion',
-//     icon: 'success',
-//     heightAuto: false,
-//     position: 'bottom',
-//     timer: 1000
-//   })
-//   .then(() => {
-//     this.router.navigate(['/home']);
-//   })
-// } else {
-//   Swal.fire({
-//     text: 'Usuario no encontrado',
-//     icon: 'error',
-//     timer: 1000,
-//     heightAuto: false
-//   })
-// }
-// })
-
-// if (this.rolp === 'profesor') {
-// Swal.fire({
-//   text: 'Correcto inicio de sesion',
-//   icon: 'success',
-//   heightAuto: false,
-//   position: 'bottom',
-//   timer: 1000
-// })
-// .then(() => {
-//   this.router.navigate(['/home-profesor']);
-// })
-// } else {
-// Swal.fire({
-//   text: 'Usuario no encontrado',
-//   icon: 'error',
-//   timer: 1000,
-//   heightAuto: false
-// })
-// }

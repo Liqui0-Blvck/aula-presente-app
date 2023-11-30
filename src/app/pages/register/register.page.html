@@ -1,7 +1,7 @@
 <ion-content>
   <div class="header">
     <div class="ion-logo">
-      <ion-img src="/assets//img/aula-presente-rounded.png"/>
+      <ion-img src="/assets/img/aula-presente-rounded.png"/>
     </div>
     <ion-title>Registrate</ion-title>
     <p>Crea una nueva cuenta Aula</p>
@@ -40,7 +40,7 @@
       <ion-item>
         <ion-input label="Password" 
           placeholder="amaroweko" 
-          type="password" 
+          [type]="hidePassword ? 'password' : 'text'" 
           labelPlacement="floating"
           class="input"
           color="secondary"
@@ -63,7 +63,7 @@
         </ion-text>
       </div> -->
 
-      <ion-button (click)="signUp()" class="btn-signIn">
+      <ion-button (click)="signUp()"  class="btn-signIn">
         Ingresar
       </ion-button>
 
@@ -75,7 +75,7 @@
 
 
        <ion-button (click)="signUpAsProfe()" class="btn-signIn">
-        Ingresar diferente
+        {{ rol }}
       </ion-button>
       <input type="hidden" formControlName="rol" />
       

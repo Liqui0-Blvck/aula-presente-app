@@ -19,6 +19,8 @@ export class RegisterPage implements OnInit {
 
   hidePassword: boolean = true;
 
+  rol: string = 'Estudiante'
+
   constructor(
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
@@ -82,7 +84,6 @@ export class RegisterPage implements OnInit {
 
           this.data.setUser(userData)
 
-          loading.dismiss();
           this.router.navigate(['/register-two']);
         } else {
           // Mostrar un mensaje de error al usuario si el registro no tiene éxito.
@@ -106,6 +107,7 @@ export class RegisterPage implements OnInit {
   signUpAsProfe() {
     const currentRole = this.regForm.get('rol')?.value;
     const newRole = currentRole === 'estudiante' ? 'profesor' : 'estudiante';
+    this.rol = newRole
     this.regForm.get('rol')?.setValue(newRole);
     console.log('Rol actual:', newRole);
   }

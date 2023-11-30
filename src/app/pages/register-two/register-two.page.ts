@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { User } from 'src/app/models';
 import { SharedService } from 'src/app/services/shared.service';
 
+
 @Component({
   selector: 'app-register-two',
   templateUrl: './register-two.page.html',
@@ -39,7 +40,8 @@ export class RegisterTwoPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private data: SharedService,
-    private firebase: FirestoreService
+    private firebase: FirestoreService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -48,7 +50,8 @@ export class RegisterTwoPage implements OnInit {
       apellido: [''],
       direccion: [''],
       cuidad: [''],
-      celular: ['']
+      celular: [''],
+      rol: ['']
     })
 
     this.data.getUser().subscribe((user) => {
@@ -115,7 +118,8 @@ export class RegisterTwoPage implements OnInit {
             this.firebase.updateDoc(userToUpdate, path, userToUpdate.uid)
               .then(() => {
                 console.log('Datos personales actualizados con éxito');
-                this.isUpdating = false; 
+                this.isUpdating = false;
+                this.router.navigate(['/home'])
               })
               .catch((error) => {
                 console.error('Error al actualizar datos personales:', error);

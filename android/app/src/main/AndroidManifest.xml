@@ -32,6 +32,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
+            <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>
         </provider>
     </application>
 
@@ -41,5 +42,9 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- To get access to the camera. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- To get access to the flashlight. -->
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
     
 </manifest>
