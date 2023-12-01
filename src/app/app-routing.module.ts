@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'login-estudiante',
     loadChildren: () => import('./pages/login-estudiante/login-estudiante.module').then( m => m.LoginEstudiantePageModule)
+  },
+  {
+    path: 'scanner',
+    loadChildren: () => import('./pages/scanner/scanner.module').then( m => m.ScannerPageModule)
   }
 
 

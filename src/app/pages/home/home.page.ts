@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+// import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 
 
@@ -97,9 +98,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported
-    })
+    // BarcodeScanner.isSupported().then((result) => {
+    //   this.isSupported = result.supported
+    // })
   }
 
   ngOnDestroy() {
@@ -171,9 +172,25 @@ export class HomePage implements OnInit, OnDestroy {
     return diaClase.toLowerCase() === diaActual.toLowerCase();
   }
 
+  startScan = async () => {
+    // Check camera permission
+    // This is just a simple example, check out the better checks below
+    await BarcodeScanner.checkPermission({ force: true });
+  
+    // make background of WebView transparent
+    // note: if you are using ionic this might not be enough, check below
+    BarcodeScanner.hideBackground();
+  
+    const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+  
+    // if the result has content
+    if (result.hasContent) {
+      console.log(result.content); // log the raw scanned content
+    }
+  };
 
   isSupported = false;
-  barcodes: Barcode[] = []
+  // barcodes: Barcode[] = []
 
   // requestPermissions() => Promise<PermissionStatus>
 
@@ -200,6 +217,9 @@ export class HomePage implements OnInit, OnDestroy {
   // }  
 
 }
+
+
+
 
 
 

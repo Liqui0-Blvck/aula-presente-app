@@ -1,0 +1,17 @@
+.wrapper__scanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 8px;
+  height: calc(100vh - 2rem);
+}
+
+.video--container {
+  padding: 10px
+  
+  video {
+    width: 100%;
+    border-radius: 6px;
+  }
+}
