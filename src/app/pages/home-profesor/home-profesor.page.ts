@@ -123,7 +123,7 @@ export class HomeProfesorPage implements OnInit {
 
       this.cursos.cursos.forEach(horarios => {
         horarios.horario.forEach(fecha => {
-          if(fecha.dia && this.verificarDiaYHoraClase(fecha.dia, 'viernes')){
+          if(fecha.dia && this.verificarDiaYHoraClase(fecha.dia, 'jueves')){
             this.componentes.push(horarios)
             this.mostrarComponente = true;
           }
@@ -149,7 +149,7 @@ export class HomeProfesorPage implements OnInit {
     const loading = await this.loadingCtrl.create();
     await loading.present();
     // Realizar la actualización en la lista
-    console.log(item)
+
     const dataToUpdate = this.componentes.map((element) => {
       if (element.codigo === item.codigo) {
 
@@ -168,18 +168,20 @@ export class HomeProfesorPage implements OnInit {
     
 
     this.cursos.cursos = dataToUpdate
-    // const path = 'horarios'
+    const path = 'horarios'
 
     
   
     // Asegúrate de actualizar los datos en Firebase si es necesario
-    // this.firebase.updateDoc(this.cursos, path, this.user.uid)
-    // .then(() => {
-    //   console.log('Datos personales actualizados con éxito');
-    // })
-    // .catch((error) => {
-    //   console.error('Error al actualizar datos personales:', error);
-    // });
+    setTimeout(() => {
+      this.firebase.updateDoc(this.cursos, path, this.user.uid)
+      .then(() => {
+        console.log('Datos personales actualizados con éxito');
+      })
+      .catch((error) => {
+        console.error('Error al actualizar datos personales:', error);
+      });
+    }, 3600000)  
   
     // También puedes navegar a otra página con los detalles del elemento, si es necesario.
     loading.dismiss();

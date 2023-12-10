@@ -44,9 +44,9 @@
                 {{ clase.profesor }}
               </p>
 
-              <span>
-                <ion-icon name="qr-code-outline" title="Barcode-Scanner" (click)="startScan"></ion-icon>
-              </span>
+              <button (click)="startScan(clase)">
+                <ion-icon name="qr-code-outline" title="Barcode-Scanner"></ion-icon>
+              </button>
             </ion-card-content>
           </ion-card>
         </swiper-slide>

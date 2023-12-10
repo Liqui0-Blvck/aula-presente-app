@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { Carrera, Horarios, User } from 'src/app/models';
+import { Carrera, Horario, Horarios, User } from 'src/app/models';
 import { Subscription } from 'rxjs';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/services/shared.service';
-// import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import Swal from 'sweetalert2';
 
 
 
@@ -51,7 +51,7 @@ export class HomePage implements OnInit, OnDestroy {
   mostrarComponente!: boolean;
   camera: boolean = false;
 
-  
+  selectedClase!: {}
 
   subscriberUserInfo!: Subscription;
 
@@ -98,9 +98,6 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    // BarcodeScanner.isSupported().then((result) => {
-    //   this.isSupported = result.supported
-    // })
   }
 
   ngOnDestroy() {
@@ -136,7 +133,6 @@ export class HomePage implements OnInit, OnDestroy {
   this.firebase.getDoc<Horarios>(path, horario_id).subscribe(res => {
     if(res){
       this.horarios = res;
-      console.log(this.horarios)
 
       this.data.setHorarios(this.horarios)
 
@@ -149,7 +145,7 @@ export class HomePage implements OnInit, OnDestroy {
       
       this.horarios.horario.forEach((hora) => {
         hora.fecha_clase.forEach((casa) => {
-          if (casa.dia && this.verificarDiaYHoraClase('lunes', 'lunes')) {
+          if (casa.dia && this.verificarDiaYHoraClase(casa.dia,'jueves')) {
             this.componentes.push(hora)
             this.mostrarComponente = true;
           }
@@ -172,56 +168,37 @@ export class HomePage implements OnInit, OnDestroy {
     return diaClase.toLowerCase() === diaActual.toLowerCase();
   }
 
-  startScan = async () => {
-    // Check camera permission
-    // This is just a simple example, check out the better checks below
-    await BarcodeScanner.checkPermission({ force: true });
-  
-    // make background of WebView transparent
-    // note: if you are using ionic this might not be enough, check below
-    BarcodeScanner.hideBackground();
-  
-    const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-  
-    // if the result has content
-    if (result.hasContent) {
-      console.log(result.content); // log the raw scanned content
+  numeroVecesPresionado = 0;
+  maximoPresionesPermitidas = 2;
+  clasesRegistradas: { [codigo: string]: boolean } = {}; 
+
+  startScan(clase: Horario){
+    const { codigo, curso, aula } = clase
+    const claseData = {
+      uid: this.uid,
+      codigo,
+      curso,
+      aula
     }
-  };
-
-  isSupported = false;
-  // barcodes: Barcode[] = []
-
-  // requestPermissions() => Promise<PermissionStatus>
-
-  // async scan(): Promise<void> {
-  //   const granted = await this.requestPermissions()
-  // }
-  // async takePicture () {
-  //   const image = await Camera.getPhoto({
-  //     quality: 90,
-  //     allowEditing: false,
-  //     resultType: CameraResultType.Uri,
-  //     source: CameraSource.Camera
-  //   });
+    
+    if (!this.clasesRegistradas[codigo]) {
   
-  //   // image.webPath will contain a path that can be set as an image src.
-  //   // You can access the original file using image.path, which can be
-  //   // passed to the Filesystem API to read the raw data of the image,
-  //   // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-  //   var imageUrl = image.webPath;
-  
-  //   // Can be set to the src of an image now
-  //   // imageElement.src = imageUrl;   
-  //   this.camera = true 
-  // }  
+      if (this.numeroVecesPresionado < this.maximoPresionesPermitidas) {
 
+        this.clasesRegistradas[clase.codigo] = true;
+  
+        this.router.navigate(['/barcode-scanning', claseData]); 
+
+        this.numeroVecesPresionado++;
+
+      }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Ya registraste tu asistencia',
+        heightAuto: false,
+        timer: 1500
+      });
+    }
+  }
 }
-
-
-
-
-
-
-
-

@@ -3,9 +3,16 @@ import { VIDEO_CONFIG } from './config.const';
 import jsQR from 'jsQR'
 import { Subject, takeUntil, timer } from 'rxjs';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import { SharedService } from 'src/app/services/shared.service';
+import { Horario, Horarios, User } from 'src/app/models';
+import { ActivatedRoute } from '@angular/router';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { Camera, CameraResultType } from '@capacitor/camera';
+
 
 @Component({
-  selector: 'app-scanner',
+  selector: 'app-scanner',  
   templateUrl: './scanner.page.html',
   styleUrls: ['./scanner.page.scss'],
 })
@@ -20,12 +27,60 @@ export class ScannerPage implements OnInit, AfterViewInit, OnDestroy {
 
   private destroy$ = new Subject<void>()
 
+  user: User = {
+    uid: '',
+    email: '',
+    institucion: '',
+    carrera: '',
+    horario: '',
+    rol: '',
+    datos_personales: {
+      apellido: '',
+      nombre: '',
+      direccion: '',
+      cuidad: '',
+      numero_celular: ''
+    }
+  };
+
+  horarios: Horarios = {
+    horario: [],
+    uid: ''
+  }
+
+  componentes: any[] = [];
+
+  
+  uid: string = ''
+  codigo: string = ''
+
   constructor(
-    private router: Router
+    private router: Router,
+    private sharedData: SharedService,
+    private route: ActivatedRoute,
+    private firebase: FirestoreService
   ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.codigo = params['codigo']
+      this.uid = params['uid']
+    });
+
+    this.sharedData.getUser().subscribe(res => {
+      if(res){
+        this.user = res
+      }
+    })
+
+    this.firebase.getDoc<Horarios>('horarios', this.user.horario).subscribe((res) => {
+      if(res){
+        this.horarios = res
+      }
+    })
+
   }
+  
 
   ngAfterViewInit(): void {
       this.prepareScanner()
@@ -44,41 +99,186 @@ export class ScannerPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async startScanner(){
-    this.videoStream = await navigator.mediaDevices.getUserMedia(this.config)
-    this.video.nativeElement.srcObject = this.videoStream
+    
+    try {
+      this.videoStream = await navigator.mediaDevices.getUserMedia(this.config);
+    
+      this.video.nativeElement.srcObject = this.videoStream
+    } catch (error) {
+      console.error('Error al iniciar la fuente de video:', error);
+    }
+    
 
     this.spyCamera()
   }
 
-  spyCamera(){
-    if (this.video.nativeElement) {
-      const { clientWidth, clientHeight } = this.video.nativeElement
 
-      this.canvas.nativeElement.width = clientWidth
-      this.canvas.nativeElement.height = clientHeight
+  // spyCamera(){
+  //   if (this.video.nativeElement) {
+  //     const { clientWidth, clientHeight } = this.video.nativeElement
 
-      const canvas = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D
+  //     this.canvas.nativeElement.width = clientWidth
+  //     this.canvas.nativeElement.height = clientHeight
 
-      canvas.drawImage(this.video.nativeElement, 0, 0, clientWidth, clientHeight)
+  //     const canvas = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D
 
-      const inversionAttempts = 'dontInvert'
+  //     canvas.drawImage(this.video.nativeElement, 0, 0, clientWidth, clientHeight)
 
-      const image = canvas.getImageData(0, 0, clientWidth, clientHeight)
-      const qrcode = jsQR(image.data, image.width, clientHeight, {inversionAttempts})
+  //     const inversionAttempts = 'dontInvert'
+
+  //     const image = canvas.getImageData(0, 0, clientWidth, clientHeight)
+  //     const qrcode = jsQR(image.data, image.width, clientHeight, {inversionAttempts})
       
-      if(qrcode){
-        
+  //     if(qrcode){
+  //       this.componentes = [];
+  //       const data = JSON.parse(qrcode.data)
+
+
+  //       if(this.codigo !== data.codigo){
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Código QR incorrecto',
+  //           text: `El código QR escaneado no corresponde a la clase ${data.nombre}` ,
+  //           heightAuto: false
+  //         }).then(() => {
+  //           this.router.navigate(['/home'])
+  //         })
+  //       } else {
+  //         this.updateData(data)
+  //       }
+  //     } else {
+  //       timer(500).pipe(takeUntil(this.destroy$)).subscribe(() => {
+  //         this.spyCamera()
+  //       })
+  //     }
+  //   }
+  // }
+
+  async spyCamera() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri
+    });
+  
+    // image.webPath contiene la ruta de la imagen que puedes usar como src de una etiqueta de image
+    if (image.webPath){
+      const imageUrl = await this.blobToDataURL(image.webPath);
+    console.log(imageUrl)
+
+    if (imageUrl){
+       // Realiza el escaneo del código QR directamente con la imagen capturada
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+      const img = new Image();
+      img.src = imageUrl;
+
+    
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+    
+        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        const qrcode = jsQR(imageData.data, img.width, img.height);
+
+        console.log(imageData)
+        console.log(qrcode)
+    
+        if (qrcode) {
+          const data = JSON.parse(qrcode.data);
+    
+          if (this.codigo !== data.codigo) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Código QR incorrecto',
+              text: `El código QR escaneado no corresponde a la clase ${data.nombre}`,
+              heightAuto: false
+            }).then(() => {
+              this.router.navigate(['/home']);
+            });
+          } else {
+            this.updateData(data);
+          }
+        } else {
+          // No se encontró un código QR en la imagen
+          console.log('No se encontró un código QR en la imagen');
+        }
+      };
+    }
+      
+
+    }
+  }
+
+  async blobToDataURL(blobUrl: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = () => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          resolve(reader.result as string);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.onerror = reject;
+      xhr.open('GET', blobUrl);
+      xhr.responseType = 'blob';
+      xhr.send();
+    });
+  }
+
+  updateData(data: any){
+    const path = 'horarios'
+    const updatedData = this.horarios.horario.map((elemento) => {
+      if(elemento.codigo === data.codigo){
+
+        const suma = elemento.asistencia+1
+        return {
+          ...elemento,
+          asistencia: suma
+        }
       } else {
-        timer(500).pipe(takeUntil(this.destroy$)).subscribe(() => {
-          this.spyCamera()
-        })
+        return elemento;
       }
+    })
+
+    this.horarios.horario = updatedData
+
+    if(this.uid === this.user.uid){
+      this.firebase.updateDoc(this.horarios, path, this.user.horario)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: 'Asistencia Exitosa',
+          text: 'Asistencia registrada con exito',
+          timer: 1500,
+          heightAuto: false
+        }).then((res) => {
+          if(res){
+            this.router.navigate(['/home'])
+          }
+        })
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: error,
+          text: 'No logrado',
+          timer: 1500,
+          heightAuto: false
+        }).then((res) => {
+          if(res){
+            this.router.navigate(['/home'])
+          }
+        })
+      });
     }
   }
 
    async checkCamera(){
     const cameraPermission = await navigator.permissions.query({name: 'camera'} as any)
-    console.log(cameraPermission)
 
     const isOk = cameraPermission.state !== 'denied'
 
