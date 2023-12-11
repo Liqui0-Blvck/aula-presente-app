@@ -113,120 +113,45 @@ export class ScannerPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
 
-  // spyCamera(){
-  //   if (this.video.nativeElement) {
-  //     const { clientWidth, clientHeight } = this.video.nativeElement
+  spyCamera(){
+    if (this.video.nativeElement) {
+      const { clientWidth, clientHeight } = this.video.nativeElement
 
-  //     this.canvas.nativeElement.width = clientWidth
-  //     this.canvas.nativeElement.height = clientHeight
+      this.canvas.nativeElement.width = clientWidth
+      this.canvas.nativeElement.height = clientHeight
 
-  //     const canvas = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D
+      const canvas = this.canvas.nativeElement.getContext('2d') as CanvasRenderingContext2D
 
-  //     canvas.drawImage(this.video.nativeElement, 0, 0, clientWidth, clientHeight)
+      canvas.drawImage(this.video.nativeElement, 0, 0, clientWidth, clientHeight)
 
-  //     const inversionAttempts = 'dontInvert'
+      const inversionAttempts = 'dontInvert'
 
-  //     const image = canvas.getImageData(0, 0, clientWidth, clientHeight)
-  //     const qrcode = jsQR(image.data, image.width, clientHeight, {inversionAttempts})
+      const image = canvas.getImageData(0, 0, clientWidth, clientHeight)
+      const qrcode = jsQR(image.data, image.width, clientHeight, {inversionAttempts})
       
-  //     if(qrcode){
-  //       this.componentes = [];
-  //       const data = JSON.parse(qrcode.data)
+      if(qrcode){
+        this.componentes = [];
+        const data = JSON.parse(qrcode.data)
 
 
-  //       if(this.codigo !== data.codigo){
-  //         Swal.fire({
-  //           icon: 'error',
-  //           title: 'Código QR incorrecto',
-  //           text: `El código QR escaneado no corresponde a la clase ${data.nombre}` ,
-  //           heightAuto: false
-  //         }).then(() => {
-  //           this.router.navigate(['/home'])
-  //         })
-  //       } else {
-  //         this.updateData(data)
-  //       }
-  //     } else {
-  //       timer(500).pipe(takeUntil(this.destroy$)).subscribe(() => {
-  //         this.spyCamera()
-  //       })
-  //     }
-  //   }
-  // }
-
-  async spyCamera() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri
-    });
-  
-    // image.webPath contiene la ruta de la imagen que puedes usar como src de una etiqueta de image
-    if (image.webPath){
-      const imageUrl = await this.blobToDataURL(image.webPath);
-    console.log(imageUrl)
-
-    if (imageUrl){
-       // Realiza el escaneo del código QR directamente con la imagen capturada
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-      const img = new Image();
-      img.src = imageUrl;
-
-    
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-    
-        const imageData = ctx.getImageData(0, 0, img.width, img.height);
-        const qrcode = jsQR(imageData.data, img.width, img.height);
-
-        console.log(imageData)
-        console.log(qrcode)
-    
-        if (qrcode) {
-          const data = JSON.parse(qrcode.data);
-    
-          if (this.codigo !== data.codigo) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Código QR incorrecto',
-              text: `El código QR escaneado no corresponde a la clase ${data.nombre}`,
-              heightAuto: false
-            }).then(() => {
-              this.router.navigate(['/home']);
-            });
-          } else {
-            this.updateData(data);
-          }
+        if(this.codigo !== data.codigo){
+          Swal.fire({
+            icon: 'error',
+            title: 'Código QR incorrecto',
+            text: `El código QR escaneado no corresponde a la clase ${data.nombre}` ,
+            heightAuto: false
+          }).then(() => {
+            this.router.navigate(['/home'])
+          })
         } else {
-          // No se encontró un código QR en la imagen
-          console.log('No se encontró un código QR en la imagen');
+          this.updateData(data)
         }
-      };
+      } else {
+        timer(500).pipe(takeUntil(this.destroy$)).subscribe(() => {
+          this.spyCamera()
+        })
+      }
     }
-      
-
-    }
-  }
-
-  async blobToDataURL(blobUrl: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result as string);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.onerror = reject;
-      xhr.open('GET', blobUrl);
-      xhr.responseType = 'blob';
-      xhr.send();
-    });
   }
 
   updateData(data: any){

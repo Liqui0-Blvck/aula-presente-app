@@ -187,7 +187,7 @@ export class HomePage implements OnInit, OnDestroy {
 
         this.clasesRegistradas[clase.codigo] = true;
   
-        this.router.navigate(['/barcode-scanning', claseData]); 
+        this.router.navigate(['/scanner', claseData]); 
 
         this.numeroVecesPresionado++;
 

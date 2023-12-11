@@ -78,13 +78,6 @@ const routes: Routes = [
   {
     path: 'qr-scanner',
     loadChildren: () => import('./pages/qr-scanner/qr-scanner.module').then( m => m.QrScannerPageModule)
-  },
-  {
-    path: 'barcode-scanning',
-    loadChildren: () =>
-      import('./pages/barcode-scanning/barcode-scanning.module').then(
-        (m) => m.BarcodeScanningModule
-      ),
   }
 
 ];
