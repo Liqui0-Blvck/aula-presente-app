@@ -7,13 +7,10 @@ La Aplicación Móvil RegistrAPP es una solución desarrollada para facilitar el
 ## Funcionalidades Principales
 - Login
 - ![Captura de pantalla 2023-11-07 195021](https://github.com/Liqui0-Blvck/aula-presente-app/assets/102757326/41a0015a-6bb2-48c0-87fe-d69f437456f8)
-- Registro
 - Dashboard para los profesores
 - ![Captura de pantalla 2023-10-11 195255](https://github.com/Liqui0-Blvck/aula-presente-app/assets/102757326/c7d104b2-04d4-4a5f-abfb-32bc4ec1e18f)
 - Generación de códigos QR dinámicos por parte de los docentes.
 - ![Captura de pantalla 2023-11-07 194904](https://github.com/Liqui0-Blvck/aula-presente-app/assets/102757326/c291b33a-a8a7-4aae-9109-cf5f1249ecd3)
-- Escaneo de códigos QR por parte de los alumnos para el registro de asistencia.
-- 
 - Interfaz amigable y fácil de usar para usuarios finales.
 - ![Captura de pantalla 2023-10-11 195214](https://github.com/Liqui0-Blvck/aula-presente-app/assets/102757326/a8abea77-af3b-422e-bc92-c6b76eeaf7e5)
 - ![Captura de pantalla 2023-10-11 195228](https://github.com/Liqui0-Blvck/aula-presente-app/assets/102757326/69549449-19ad-407f-a73b-0bf2e615f886)
@@ -24,20 +21,25 @@ La Aplicación Móvil RegistrAPP es una solución desarrollada para facilitar el
 
 
 
-
-
-
 ## Tecnologías y frameworks utilizados 
 
 - Node.js
 - Ionic Framework
 - Angular
+- Firebase (Autenticación y Firestore)
 
 ## Configuración del Proyecto
 
-1. Clona este repositorio: `git clone https://github.com/tuusuario/RegistrAPP.git`
-2. Navega al directorio del proyecto: `cd RegistrAPP`
+1. Clona este repositorio: `git clone https://github.com/Liqui0-Blvck/Aula-presente-app.git`
+2. Navega al directorio del proyecto: `cd aula-presente-app`
 3. Instala las dependencias: `npm install`
+
+### Configuración de Firebase
+
+1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com/).
+2. Configura tu aplicación con Firebase y obtén las credenciales.
+3. Reemplaza las credenciales en el archivo `src/environments/environment.ts`.
+
 
 ## Ejecución del Proyecto
 
